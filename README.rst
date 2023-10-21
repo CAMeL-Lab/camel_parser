@@ -1,4 +1,4 @@
-# CamelParser
+CamelParser
 =============
 
 .. image:: https://img.shields.io/pypi/l/camel-tools.svg
