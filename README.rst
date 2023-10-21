@@ -25,7 +25,9 @@ To install the required packages, run
     pip install -r requirements.txt
 
 Setting up the morphology db
-----------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You must install the morphology db for CamelParser to work.
 
 1. Install camel_tools v1.5.2 or later (you can check this using camel_data -v)
 
