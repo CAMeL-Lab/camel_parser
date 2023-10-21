@@ -42,6 +42,7 @@ If you use CamelParser in your research, please cite
     }
 
 and
+
 .. code-block:: bibtex
 
    @inproceedings{obeid-etal-2020-camel,
