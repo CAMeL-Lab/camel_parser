@@ -32,7 +32,6 @@ You must install the morphology db for CamelParser to work.
 1. Install camel_tools v1.5.2 or later (you can check this using camel_data -v)
 
 2. Download the camel data for the BERT unfactored (MSA) model, as well as the morphology database:
-    commands:
 
 .. code-block:: bash
 
