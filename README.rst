@@ -1,4 +1,12 @@
 # CamelParser
+=============
+
+.. image:: https://img.shields.io/pypi/l/camel-tools.svg
+   :target: https://opensource.org/licenses/MIT
+   :alt: MIT License
+
+Introduction
+------------
 
 CamelParser is an open-source Python-based Arabic dependency parser targeting two popular Arabic dependency formalisms, 
 the Columbia Arabic Treebank (CATiB), and Universal Dependencies (UD).
@@ -7,7 +15,8 @@ The CamelParser pipeline handles the processing of raw text and roduces tokeniza
 For disambiguation, users can choose between the BERT unfactored disambiguator, or a lighter Maximum Likelihood Estimation (MLE) disambiguator, both of which are included in CAMeL Tools. For depednecy parsing, we use the SuPar Biaffine Dependency Parser.
 
 
-## Setting up the morphology db
+Setting up the morphology db
+----------------------------
 
 1. Install camel_tools v1.5.2 or later (you can check this using camel_data -v)
 
@@ -25,7 +34,8 @@ For disambiguation, users can choose between the BERT unfactored disambiguator, 
 
         camel_data -p morphology-db-msa-s31 /path/to/LDC2010L01.tgz
 
-## Citation
+Citation
+--------
 
 If you use CamelParser in your research, please cite
 
