@@ -1,0 +1,74 @@
+# text = فاتصل علي أحد أصدقائي وقال لي: إني متواجد أمام بيتك،
+# treeTokens = ف+ اتصل على +ي أحد أصدقاء +ي و+ قال ل +ي : أن +ني متواجد أمام بيت +ك ,
+1	ف+	ف+	PRT	_	ud=CCONJ|pos=conj|prc3=0|prc2=0|prc1=0|prc0=na|per=na|asp=na|vox=na|mod=na|gen=na|num=na|stt=na|cas=na|enc0=0|rat=na|token_type=prc2	2	MOD	_	_
+2	اتصل	ٱتصل	VRB	_	ud=VERB|pos=verb|prc3=0|prc2=0|prc1=0|prc0=0|per=3|asp=p|vox=a|mod=i|gen=m|num=s|stt=na|cas=na|enc0=0|rat=n|token_type=baseword	0	---	_	_
+3	على	على	PRT	_	ud=ADP|pos=prep|prc3=0|prc2=0|prc1=0|prc0=na|enc0=0|asp=na|vox=na|mod=na|gen=na|num=na|stt=na|cas=na|per=na|rat=na|token_type=baseword	2	MOD	_	_
+4	+ي	+ي	NOM	_	ud=PRON|pos=pron|prc3=0|prc2=0|prc1=0|prc0=0|enc0=0|asp=na|vox=na|mod=na|gen=m|num=s|stt=d|cas=u|per=1|rat=na|token_type=enc0	3	OBJ	_	_
+5	أحد	أحد	NOM	_	ud=NUM|pos=noun_num|prc3=0|prc2=0|prc1=0|prc0=0|enc0=0|asp=na|vox=na|mod=na|gen=m|num=s|stt=c|cas=n|per=na|rat=n|token_type=baseword	2	SBJ	_	_
+6	أصدقاء	صديق	NOM	_	ud=NOUN|pos=noun|prc3=0|prc2=0|prc1=0|prc0=0|enc0=0|asp=na|vox=na|mod=na|gen=m|num=p|stt=c|cas=u|per=na|rat=r|token_type=baseword	5	IDF	_	_
+7	+ي	+ي	NOM	_	ud=PRON|pos=pron|prc3=0|prc2=0|prc1=0|prc0=0|enc0=0|asp=na|vox=na|mod=na|gen=m|num=s|stt=d|cas=g|per=1|rat=na|token_type=enc0	6	IDF	_	_
+8	و+	و+	PRT	_	ud=CCONJ|pos=conj|prc3=0|prc2=0|prc1=0|prc0=na|per=na|asp=na|vox=na|mod=na|gen=na|num=na|stt=na|cas=na|enc0=0|rat=na|token_type=prc2	2	MOD	_	_
+9	قال	قال	VRB	_	ud=VERB|pos=verb|prc3=0|prc2=0|prc1=0|prc0=0|per=3|asp=p|vox=a|mod=i|gen=m|num=s|stt=na|cas=na|enc0=0|rat=n|token_type=baseword	8	OBJ	_	_
+10	ل	ل	PRT	_	ud=ADP|pos=prep|prc3=0|prc2=0|prc1=0|prc0=na|enc0=0|asp=na|vox=na|mod=na|gen=na|num=na|stt=na|cas=na|per=na|rat=na|token_type=baseword	9	MOD	_	_
+11	+ي	+ي	NOM	_	ud=PRON|pos=pron|prc3=0|prc2=0|prc1=0|prc0=0|enc0=0|asp=na|vox=na|mod=na|gen=m|num=s|stt=d|cas=u|per=1|rat=na|token_type=enc0	10	OBJ	_	_
+12	:	:	PNX	_	ud=PUNCT|pos=punc|prc3=na|prc2=na|prc1=na|prc0=na|enc0=na|asp=na|vox=na|mod=na|gen=na|num=na|stt=na|cas=na|per=na|rat=na|token_type=baseword	9	MOD	_	_
+13	أن	أن	PRT	_	ud=SCONJ|pos=conj_sub|prc3=0|prc2=0|prc1=0|prc0=na|enc0=0|asp=na|vox=na|mod=na|gen=na|num=na|stt=na|cas=na|per=na|rat=na|token_type=baseword	9	OBJ	_	_
+14	+ني	+ني	NOM	_	ud=PRON|pos=pron|prc3=0|prc2=0|prc1=0|prc0=0|enc0=0|asp=na|vox=na|mod=na|gen=m|num=s|stt=d|cas=u|per=1|rat=na|token_type=enc0	13	SBJ	_	_
+15	متواجد	متواجد	NOM	_	ud=NOUN|pos=noun|prc3=0|prc2=0|prc1=0|prc0=0|enc0=0|asp=na|vox=na|mod=na|gen=m|num=s|stt=i|cas=n|per=na|rat=r|token_type=baseword	13	PRD	_	_
+16	أمام	أمام	NOM	_	ud=NOUN|pos=noun|prc3=0|prc2=0|prc1=0|prc0=0|enc0=0|asp=na|vox=na|mod=na|gen=m|num=s|stt=c|cas=a|per=na|rat=i|token_type=baseword	15	MOD	_	_
+17	بيت	بيت	NOM	_	ud=NOUN|pos=noun|prc3=0|prc2=0|prc1=0|prc0=0|enc0=0|asp=na|vox=na|mod=na|gen=m|num=s|stt=c|cas=g|per=na|rat=i|token_type=baseword	16	IDF	_	_
+18	+ك	+ك	NOM	_	ud=PRON|pos=pron|prc3=0|prc2=0|prc1=0|prc0=0|enc0=0|asp=na|vox=na|mod=na|gen=m|num=s|stt=d|cas=g|per=2|rat=na|token_type=enc0	17	IDF	_	_
+19	,	,	PNX	_	ud=PUNCT|pos=punc|prc3=na|prc2=na|prc1=na|prc0=na|enc0=na|asp=na|vox=na|mod=na|gen=na|num=na|stt=na|cas=na|per=na|rat=na|token_type=baseword	2	MOD	_	_
+
+# text = فنزلت وسلمت عليه قبل أن أسافر،
+# treeTokens = ف+ نزلت و+ سلمت على +ه قبل أن أسافر ,
+1	ف+	ف+	PRT	_	ud=CCONJ|pos=conj|prc3=0|prc2=0|prc1=0|prc0=na|per=na|asp=na|vox=na|mod=na|gen=na|num=na|stt=na|cas=na|enc0=0|rat=na|token_type=prc2	2	MOD	_	_
+2	نزلت	نزل	VRB	_	ud=VERB|pos=verb|prc3=0|prc2=0|prc1=0|prc0=0|per=1|asp=p|vox=a|mod=i|gen=m|num=s|stt=na|cas=na|enc0=0|rat=n|token_type=baseword	0	---	_	_
+3	و+	و+	PRT	_	ud=CCONJ|pos=conj|prc3=0|prc2=0|prc1=0|prc0=na|per=na|asp=na|vox=na|mod=na|gen=na|num=na|stt=na|cas=na|enc0=0|rat=na|token_type=prc2	2	MOD	_	_
+4	سلمت	سلم	VRB	_	ud=VERB|pos=verb|prc3=0|prc2=0|prc1=0|prc0=0|per=1|asp=p|vox=a|mod=i|gen=m|num=s|stt=na|cas=na|enc0=0|rat=n|token_type=baseword	3	OBJ	_	_
+5	على	على	PRT	_	ud=ADP|pos=prep|prc3=0|prc2=0|prc1=0|prc0=na|enc0=0|asp=na|vox=na|mod=na|gen=na|num=na|stt=na|cas=na|per=na|rat=na|token_type=baseword	4	MOD	_	_
+6	+ه	+ه	NOM	_	ud=PRON|pos=pron|prc3=0|prc2=0|prc1=0|prc0=0|enc0=0|asp=na|vox=na|mod=na|gen=m|num=s|stt=d|cas=u|per=3|rat=na|token_type=enc0	5	OBJ	_	_
+7	قبل	قبل	NOM	_	ud=NOUN|pos=noun|prc3=0|prc2=0|prc1=0|prc0=0|enc0=0|asp=na|vox=na|mod=na|gen=m|num=s|stt=c|cas=a|per=na|rat=i|token_type=baseword	4	MOD	_	_
+8	أن	أن	PRT	_	ud=SCONJ|pos=conj_sub|prc3=0|prc2=0|prc1=0|prc0=na|enc0=0|asp=na|vox=na|mod=na|gen=na|num=na|stt=na|cas=na|per=na|rat=na|token_type=baseword	7	IDF	_	_
+9	أسافر	سافر	VRB	_	ud=VERB|pos=verb|prc3=0|prc2=0|prc1=0|prc0=0|enc0=0|asp=i|vox=a|mod=s|gen=m|num=s|stt=na|cas=na|per=1|rat=n|token_type=baseword	8	OBJ	_	_
+10	,	,	PNX	_	ud=PUNCT|pos=punc|prc3=na|prc2=na|prc1=na|prc0=na|enc0=na|asp=na|vox=na|mod=na|gen=na|num=na|stt=na|cas=na|per=na|rat=na|token_type=baseword	2	MOD	_	_
+
+# text = وبعدها جاء أصدقائي وذهبت معهم،
+# treeTokens = و+ بعد +ها جاء أصدقاء +ي و+ ذهبت مع +هم ,
+1	و+	و+	PRT	_	ud=CCONJ|pos=conj|prc3=0|prc2=0|prc1=0|prc0=na|per=na|asp=na|vox=na|mod=na|gen=na|num=na|stt=na|cas=na|enc0=0|rat=na|token_type=prc2	4	MOD	_	_
+2	بعد	بعد	NOM	_	ud=NOUN|pos=noun|prc3=0|prc2=0|prc1=0|prc0=0|per=na|asp=na|vox=na|mod=na|gen=m|num=s|stt=c|cas=a|enc0=0|rat=i|token_type=baseword	4	MOD	_	_
+3	+ها	+ها	NOM	_	ud=PRON|pos=pron|prc3=0|prc2=0|prc1=0|prc0=0|per=3|asp=na|vox=na|mod=na|gen=f|num=s|stt=d|cas=g|enc0=0|rat=na|token_type=enc0	2	IDF	_	_
+4	جاء	جاء	VRB	_	ud=VERB|pos=verb|prc3=0|prc2=0|prc1=0|prc0=0|enc0=0|asp=p|vox=a|mod=i|gen=m|num=s|stt=na|cas=na|per=3|rat=n|token_type=baseword	0	---	_	_
+5	أصدقاء	صديق	NOM	_	ud=NOUN|pos=noun|prc3=0|prc2=0|prc1=0|prc0=0|enc0=0|asp=na|vox=na|mod=na|gen=m|num=p|stt=c|cas=u|per=na|rat=r|token_type=baseword	4	SBJ	_	_
+6	+ي	+ي	NOM	_	ud=PRON|pos=pron|prc3=0|prc2=0|prc1=0|prc0=0|enc0=0|asp=na|vox=na|mod=na|gen=m|num=s|stt=d|cas=g|per=1|rat=na|token_type=enc0	5	IDF	_	_
+7	و+	و+	PRT	_	ud=CCONJ|pos=conj|prc3=0|prc2=0|prc1=0|prc0=na|per=na|asp=na|vox=na|mod=na|gen=na|num=na|stt=na|cas=na|enc0=0|rat=na|token_type=prc2	4	MOD	_	_
+8	ذهبت	ذهب	VRB	_	ud=VERB|pos=verb|prc3=0|prc2=0|prc1=0|prc0=0|per=1|asp=p|vox=a|mod=i|gen=m|num=s|stt=na|cas=na|enc0=0|rat=n|token_type=baseword	7	OBJ	_	_
+9	مع	مع	NOM	_	ud=NOUN|pos=noun|prc3=0|prc2=0|prc1=0|prc0=0|enc0=0|asp=na|vox=na|mod=na|gen=m|num=s|stt=c|cas=a|per=na|rat=i|token_type=baseword	8	MOD	_	_
+10	+هم	+هم	NOM	_	ud=PRON|pos=pron|prc3=0|prc2=0|prc1=0|prc0=0|enc0=0|asp=na|vox=na|mod=na|gen=m|num=p|stt=d|cas=g|per=3|rat=na|token_type=enc0	9	IDF	_	_
+11	,	,	PNX	_	ud=PUNCT|pos=punc|prc3=na|prc2=na|prc1=na|prc0=na|enc0=na|asp=na|vox=na|mod=na|gen=na|num=na|stt=na|cas=na|per=na|rat=na|token_type=baseword	4	MOD	_	_
+
+# text = كان في طريقي إلى المطار حادث وخشيت أن تفوتني الرحلة،
+# treeTokens = كان في طريق +ي إلى المطار حادث و+ خشيت أن تفوت +ني الرحلة ,
+1	كان	كان	VRB	_	ud=VERB|pos=verb|prc3=0|prc2=0|prc1=0|prc0=0|enc0=0|asp=p|vox=a|mod=i|gen=m|num=s|stt=na|cas=na|per=3|rat=n|token_type=baseword	0	---	_	_
+2	في	في	PRT	_	ud=ADP|pos=prep|prc3=0|prc2=0|prc1=0|prc0=na|enc0=0|asp=na|vox=na|mod=na|gen=na|num=na|stt=na|cas=na|per=na|rat=na|token_type=baseword	1	PRD	_	_
+3	طريق	طريق	NOM	_	ud=NOUN|pos=noun|prc3=0|prc2=0|prc1=0|prc0=0|enc0=0|asp=na|vox=na|mod=na|gen=m|num=s|stt=c|cas=u|per=na|rat=i|token_type=baseword	2	OBJ	_	_
+4	+ي	+ي	NOM	_	ud=PRON|pos=pron|prc3=0|prc2=0|prc1=0|prc0=0|enc0=0|asp=na|vox=na|mod=na|gen=m|num=s|stt=d|cas=g|per=1|rat=na|token_type=enc0	3	IDF	_	_
+5	إلى	إلى	PRT	_	ud=ADP|pos=prep|prc3=0|prc2=0|prc1=0|prc0=na|enc0=0|asp=na|vox=na|mod=na|gen=na|num=na|stt=na|cas=na|per=na|rat=na|token_type=baseword	3	MOD	_	_
+6	المطار	مطار	NOM	_	ud=NOUN|pos=noun|prc3=0|prc2=0|prc1=0|prc0=Al_det|enc0=0|asp=na|vox=na|mod=na|gen=m|num=s|stt=d|cas=g|per=na|rat=i|token_type=baseword	5	OBJ	_	_
+7	حادث	حادث	NOM	_	ud=NOUN|pos=noun|prc3=0|prc2=0|prc1=0|prc0=0|enc0=0|asp=na|vox=na|mod=na|gen=m|num=s|stt=i|cas=n|per=na|rat=i|token_type=baseword	1	SBJ	_	_
+8	و+	و+	PRT	_	ud=CCONJ|pos=conj|prc3=0|prc2=0|prc1=0|prc0=na|per=na|asp=na|vox=na|mod=na|gen=na|num=na|stt=na|cas=na|enc0=0|rat=na|token_type=prc2	1	MOD	_	_
+9	خشيت	خشي	VRB	_	ud=VERB|pos=verb|prc3=0|prc2=0|prc1=0|prc0=0|per=1|asp=p|vox=a|mod=i|gen=m|num=s|stt=na|cas=na|enc0=0|rat=n|token_type=baseword	8	OBJ	_	_
+10	أن	أن	PRT	_	ud=SCONJ|pos=conj_sub|prc3=0|prc2=0|prc1=0|prc0=na|enc0=0|asp=na|vox=na|mod=na|gen=na|num=na|stt=na|cas=na|per=na|rat=na|token_type=baseword	9	OBJ	_	_
+11	تفوت	فات	VRB	_	ud=VERB|pos=verb|prc3=0|prc2=0|prc1=0|prc0=0|enc0=0|asp=i|vox=a|mod=i|gen=f|num=s|stt=na|cas=na|per=3|rat=n|token_type=baseword	10	OBJ	_	_
+12	+ني	+ني	NOM	_	ud=PRON|pos=pron|prc3=0|prc2=0|prc1=0|prc0=0|enc0=0|asp=na|vox=na|mod=na|gen=m|num=s|stt=d|cas=a|per=1|rat=na|token_type=enc0	11	OBJ	_	_
+13	الرحلة	رحلة	NOM	_	ud=NOUN|pos=noun|prc3=0|prc2=0|prc1=0|prc0=Al_det|enc0=0|asp=na|vox=na|mod=na|gen=f|num=s|stt=d|cas=n|per=na|rat=i|token_type=baseword	11	SBJ	_	_
+14	,	,	PNX	_	ud=PUNCT|pos=punc|prc3=na|prc2=na|prc1=na|prc0=na|enc0=na|asp=na|vox=na|mod=na|gen=na|num=na|stt=na|cas=na|per=na|rat=na|token_type=baseword	1	MOD	_	_
+
+# text = وهل سيشرحونها؟
+# treeTokens = و+ هل س+ يشرحون +ها ?
+1	و+	و+	PRT	_	ud=CCONJ|pos=conj|prc3=0|prc2=0|prc1=0|prc0=na|per=na|asp=na|vox=na|mod=na|gen=na|num=na|stt=na|cas=na|enc0=0|rat=na|token_type=prc2	4	MOD	_	_
+2	هل	هل	PRT	_	ud=PART|pos=part_interrog|prc3=0|prc2=0|prc1=0|prc0=na|per=na|asp=na|vox=na|mod=na|gen=na|num=na|stt=na|cas=na|enc0=0|rat=na|token_type=baseword	4	MOD_
+3	س+	س+	PRT	_	ud=AUX|pos=part_fut|prc3=0|prc2=0|prc1=0|prc0=na|per=na|asp=na|vox=na|mod=na|gen=na|num=na|stt=na|cas=na|enc0=0|rat=na|token_type=prc1	4	MOD	_	_
+4	يشرحون	شرح	VRB	_	ud=VERB|pos=verb|prc3=0|prc2=0|prc1=0|prc0=0|per=3|asp=i|vox=a|mod=i|gen=m|num=p|stt=na|cas=na|enc0=0|rat=n|token_type=baseword	0	---	_	_
+5	+ها	+ها	NOM	_	ud=PRON|pos=pron|prc3=0|prc2=0|prc1=0|prc0=0|per=3|asp=na|vox=na|mod=na|gen=f|num=s|stt=d|cas=a|enc0=0|rat=na|token_type=enc0	4	OBJ	_	_
+6	?	?	PNX	_	ud=PUNCT|pos=punc|prc3=na|prc2=na|prc1=na|prc0=na|enc0=na|asp=na|vox=na|mod=na|gen=na|num=na|stt=na|cas=na|per=na|rat=na|token_type=baseword	4	MOD	_	_
