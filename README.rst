@@ -37,7 +37,7 @@ You must install the morphology db for CamelParser to work.
 
     camel_data -i morphology-db-msa-s31 
     camel_data -i disambig-bert-unfactored-msa
-
+    
 3. Download the LDC2010L01 from the ldc downloads:
     - go to https://catalog.ldc.upenn.edu/organization/downloads
     - search for LDC2010L01.tgz and download it
