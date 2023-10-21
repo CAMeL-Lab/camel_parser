@@ -15,6 +15,15 @@ The CamelParser pipeline handles the processing of raw text and roduces tokeniza
 For disambiguation, users can choose between the BERT unfactored disambiguator, or a lighter Maximum Likelihood Estimation (MLE) disambiguator, both of which are included in CAMeL Tools. For depednecy parsing, we use the SuPar Biaffine Dependency Parser.
 
 
+Installation
+------------
+
+To install the required packages, run
+
+.. code-block:: bash
+
+    pip install -r requirements.txt
+
 Setting up the morphology db
 ----------------------------
 
@@ -22,6 +31,8 @@ Setting up the morphology db
 
 2. Download the camel data for the BERT unfactored (MSA) model, as well as the morphology database:
     commands:
+
+    .. code-block:: bash
 
         camel_data -i morphology-db-msa-s31 
         camel_data -i disambig-bert-unfactored-msa
@@ -32,6 +43,8 @@ Setting up the morphology db
 
 4. DO NOT EXTRACT LDC2010L01.tgz! We'll use the following command from camel tools to install the db:
 
+    .. code-block:: bash
+        
         camel_data -p morphology-db-msa-s31 /path/to/LDC2010L01.tgz
 
 Citation
