@@ -25,7 +25,7 @@ Options:
     -d <disambiguator> --disambiguator=<disambiguator>
         The disambiguation technique used to tokenize the text lines, either 'mle' or 'bert'
     -m <model> --model=<model>
-        The BERT model used to parse. The .model will be added to the end of the file automatically [default: patb+cameltb-all_msa]
+        The path to the BERT model used to parse.
     -l --log
         Log execution time for various stages.
     -t <tagset> --tagset=<tagset>
@@ -122,7 +122,7 @@ def main():
     if log:
         log_file = "log-"+datetime.now().strftime("%d-%m-%Y-%H:%M:%S")
     if file_type == 'conll':
-        parse_conll(file_path, logs=logs, model_name=parse_model)
+        parse_conll(file_path, logs=logs, model_path=parse_model)
         if log:
             with open("./logs/"+log_file,'w') as f:
                 for key, value in logs.items():   
@@ -163,7 +163,7 @@ def main():
 
     et = time.time()
     logs["input preparation"] = et-st
-    parsed_tuples = parse_tuples(sentence_tuples, logs=logs, model_name=parse_model)
+    parsed_tuples = parse_tuples(sentence_tuples, logs=logs, model_path=parse_model)
     st = time.time()
     # print_to_conll(merge_tuples(parsed_tuples, sentence_tuples), sentences=lines)
     print_to_conll(parsed_tuples, sentences=lines)
