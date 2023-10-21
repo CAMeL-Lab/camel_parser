@@ -160,3 +160,4 @@ cython_debug/
 #.idea/
 
 .DS_Store
+models/patb+cameltb-all_msa.model
