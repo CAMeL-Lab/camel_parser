@@ -41,6 +41,7 @@ If you use CamelParser in your research, please cite
         year = "2023"
     }
 
+and
 .. code-block:: bibtex
 
    @inproceedings{obeid-etal-2020-camel,
