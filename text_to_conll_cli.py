@@ -28,7 +28,7 @@ Options:
     -d <disambiguator> --disambiguator=<disambiguator>
         The disambiguation technique used to tokenize the text lines, either 'mle' or 'bert' [default: bert]
     -m <model> --model=<model>
-        The name BERT model used to parse (to be placed in the model directory) [default: msa]
+        The name BERT model used to parse (to be placed in the model directory) [default: catib]
     -t <tagset> --tagset=<tagset>
         Selecting either catib6 or UD as the POS tagset [default: catib6]
     -l --log
@@ -37,12 +37,14 @@ Options:
         Show this screen.
 """
 
+from pathlib import Path
 from typing import List
 from camel_tools.disambig.common import DisambiguatedWord
 from camel_tools.utils.charmap import CharMapper
 from camel_tools.morphology.database import MorphologyDB
 from camel_tools.morphology.analyzer import Analyzer
 from src.disambiguation.disambiguator_interface import get_disambiguator
+from src.initialization import setup_parsing_model
 from src.parse_disambiguation.disambiguation_analysis import to_sentence_analysis_list
 from src.parse_disambiguation.feature_extraction import to_sentence_features_list
 from src.text_cleaner import clean_lines, split_lines_words
@@ -96,6 +98,8 @@ def get_file_type(file_type):
 
 
 def main():
+    root_dir = Path(__file__).parent
+    model_path = root_dir/"models"
     
     #
     ### cli user input ###
@@ -105,7 +109,7 @@ def main():
     file_type = get_file_type(arguments['--file_type'])
     morphology_db = arguments['--morphology_db']
     disambiguator_type = arguments['--disambiguator']
-    parse_model = arguments['--model'] if arguments['--model'].endswith('.model') else f"{arguments['--model']}.model"
+    parse_model = arguments['--model']
     log = arguments['--log']
     tagset = arguments['--tagset']
 
@@ -118,7 +122,7 @@ def main():
     if log:
         log_file = "log-"+datetime.now().strftime("%d-%m-%Y-%H:%M:%S")
     if file_type == 'conll':
-        parse_conll(file_path, logs=logs, model_name=parse_model)
+        parse_conll(file_path, logs=logs, parse_model=model_path/model_name)
         if log:
             with open("./logs/"+log_file,'w') as f:
                 for key, value in logs.items():   
@@ -139,6 +143,12 @@ def main():
     db = MorphologyDB.builtin_db(db_name=db_type)
     analyzer = Analyzer(db=db, backoff='ADD_PROP', cache_size=100000)
     disambiguator = get_disambiguator(disambiguator_type, analyzer)
+    
+    #
+    ### Set up parsing model
+    #
+    model_name = setup_parsing_model(parse_model, model_path=model_path)
+    
     
     #
     ### Get clitic features
@@ -173,7 +183,7 @@ def main():
 
     et = time.time()
     logs["input preparation"] = et-st
-    parsed_tuples = parse_tuples(sentence_tuples, logs=logs, model_name=parse_model)
+    parsed_tuples = parse_tuples(sentence_tuples, logs=logs, parse_model=model_path/model_name)
     st = time.time()
     # print_to_conll(merge_tuples(parsed_tuples, sentence_tuples), sentences=lines)
     print_to_conll(parsed_tuples, sentences=lines)
