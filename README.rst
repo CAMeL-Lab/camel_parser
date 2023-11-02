@@ -24,10 +24,13 @@ To install the required packages, run
 
     pip install -r requirements.txt
 
-Setting up the morphology db
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Using another morphology database
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You must install the morphology db for CamelParser to work.
+Curently, the CamelParser uses CamelTools' default morphology database, the morphology-db-msa-r13.
+
+For our paper, we used the calima-msa-s31 databse. To get this to reproduce our experiments, follow these steps (note that you need an account with the LDC):
+
 
 1. Install camel_tools v1.5.2 or later (you can check this using camel_data -v)
 
@@ -37,7 +40,7 @@ You must install the morphology db for CamelParser to work.
 
     camel_data -i morphology-db-msa-s31 
     camel_data -i disambig-bert-unfactored-msa
-    
+
 3. Download the LDC2010L01 from the ldc downloads:
     - go to https://catalog.ldc.upenn.edu/organization/downloads
     - search for LDC2010L01.tgz and download it
@@ -47,6 +50,8 @@ You must install the morphology db for CamelParser to work.
 .. code-block:: bash
 
     camel_data -p morphology-db-msa-s31 /path/to/LDC2010L01.tgz
+
+5. When running the main script, use -b and pass calima-msa-s31.
 
 Citation
 --------
