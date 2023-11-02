@@ -25,11 +25,11 @@ Options:
     -d <disambiguator> --disambiguator=<disambiguator>
         The disambiguation technique used to tokenize the text lines, either 'mle' or 'bert'
     -m <model> --model=<model>
-        The path to the BERT model used to parse.
-    -l --log
-        Log execution time for various stages.
+        The name BERT model used to parse (to be placed in the model directory) [default: msa]
     -t <tagset> --tagset=<tagset>
-        Selecting either catib6 or UD as the POS tagset [default: catib6].
+        Selecting either catib6 or UD as the POS tagset [default: catib6]
+    -l --log
+        Log execution time for various stages
     -h --help
         Show this screen.
 """
