@@ -23,7 +23,7 @@ Options:
             tok_tagged: tokenized and tagged text
             parse_tok: only parse tokenized input; don't disambiguate to add features
     -d <disambiguator> --disambiguator=<disambiguator>
-        The disambiguation technique used to tokenize the text lines, either 'mle' or 'bert'
+        The disambiguation technique used to tokenize the text lines, either 'mle' or 'bert' [default: bert]
     -m <model> --model=<model>
         The name BERT model used to parse (to be placed in the model directory) [default: msa]
     -t <tagset> --tagset=<tagset>
@@ -122,7 +122,7 @@ def main():
     if log:
         log_file = "log-"+datetime.now().strftime("%d-%m-%Y-%H:%M:%S")
     if file_type == 'conll':
-        parse_conll(file_path, logs=logs, model_path=parse_model)
+        parse_conll(file_path, logs=logs, model_name=parse_model)
         if log:
             with open("./logs/"+log_file,'w') as f:
                 for key, value in logs.items():   
