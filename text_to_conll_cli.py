@@ -163,7 +163,7 @@ def main():
 
     et = time.time()
     logs["input preparation"] = et-st
-    parsed_tuples = parse_tuples(sentence_tuples, logs=logs, model_path=parse_model)
+    parsed_tuples = parse_tuples(sentence_tuples, logs=logs, model_name=parse_model)
     st = time.time()
     # print_to_conll(merge_tuples(parsed_tuples, sentence_tuples), sentences=lines)
     print_to_conll(parsed_tuples, sentences=lines)
