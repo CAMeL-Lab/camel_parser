@@ -24,6 +24,17 @@ To install the required packages, run
 
     pip install -r requirements.txt
 
+Examples
+------------
+Parsing a single sentence
+
+.. code-block:: bash
+    python text_to_conll_cli.py -s "جامعة نيويورك أبو ظبي تنشر أول أطلس لكوكب المريخ باللغة العربية" -f raw
+
+    # the verbose version (including default values):
+    python text_to_conll_cli.py -s "جامعة نيويورك أبو ظبي تنشر أول أطلس لكوكب المريخ باللغة العربية" -f raw -b r13 -d bert -m catib -t catib6 -log True 
+
+
 Using another morphology database
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
