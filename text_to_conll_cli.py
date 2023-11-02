@@ -4,7 +4,8 @@ Disambiguator and Conll builder CLI.
 Usage:
     text_to_conll_cli (-i <input> | --input=<input> | -s <string> | --string=<string>)
         (-f <file_type> | --file_type=<file_type>)
-        (-d <disambiguator> | --disambiguator=<disambiguator>)
+        [-b <morphology_db> | --morphology_db=<morphology_db>]
+        [-d <disambiguator> | --disambiguator=<disambiguator>]
         [-m <model> | --model=<model>]
         [-t  <tagset>| --tagset=<tagset>]
         [-l | --log]
@@ -22,6 +23,8 @@ Options:
             tokenized: tokenized text
             tok_tagged: tokenized and tagged text
             parse_tok: only parse tokenized input; don't disambiguate to add features
+    -b <morphology_db> --morphology_db=<morphology_db>
+        The morphology database to use; will use camel_tools built-in by default [default: r13]
     -d <disambiguator> --disambiguator=<disambiguator>
         The disambiguation technique used to tokenize the text lines, either 'mle' or 'bert' [default: bert]
     -m <model> --model=<model>
@@ -93,16 +96,6 @@ def get_file_type(file_type):
 
 
 def main():
-    #
-    ### camel_tools imports ###
-    #
-    # used to clean text
-    arclean = CharMapper.builtin_mapper("arclean")
-
-    
-    # used to initialize an Analyzer with ADD_PROP backoff 
-    db = MorphologyDB.builtin_db('calima-msa-s31')
-    analyzer = Analyzer(db=db, backoff='ADD_PROP', cache_size=100000)
     
     #
     ### cli user input ###
@@ -110,13 +103,16 @@ def main():
     file_path = arguments['--input']
     string_text = arguments['--string']
     file_type = get_file_type(arguments['--file_type'])
+    morphology_db = arguments['--morphology_db']
     disambiguator_type = arguments['--disambiguator']
     parse_model = arguments['--model'] if arguments['--model'].endswith('.model') else f"{arguments['--model']}.model"
     log = arguments['--log']
     tagset = arguments['--tagset']
 
-    # file_path = 'data/sample_text.txt'
-    # disambiguator_type = 'mle'
+
+    #
+    ### Set up logger
+    #
     log_file = None
     logs = {}
     if log:
@@ -131,8 +127,22 @@ def main():
 
 
     st = time.time()
+    
+    #
+    ### camel_tools imports ###
+    #
+    # used to clean text
+    arclean = CharMapper.builtin_mapper("arclean")
+    # used to initialize an Analyzer with ADD_PROP backoff 
+    # db = MorphologyDB.builtin_db('calima-msa-s31')
+    db_type = None if morphology_db == 'r13' else morphology_db
+    db = MorphologyDB.builtin_db(db_name=db_type)
+    analyzer = Analyzer(db=db, backoff='ADD_PROP', cache_size=100000)
     disambiguator = get_disambiguator(disambiguator_type, analyzer)
     
+    #
+    ### Get clitic features
+    #
     clitic_feats_df = read_csv('data/clitic_feats.csv')
     clitic_feats_df = clitic_feats_df.astype(str).astype(object) # so ints read are treated as string objects
     
