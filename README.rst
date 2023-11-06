@@ -35,7 +35,10 @@ Parsing a single sentence
     
     python text_to_conll_cli.py -s "جامعة نيويورك أبو ظبي تنشر أول أطلس لكوكب المريخ باللغة العربية" -f raw
 
-    # the verbose version of the above example (default values are shown):
+The verbose version of the above example (default values are shown):
+
+.. code-block:: bash
+
     python text_to_conll_cli.py -s "جامعة نيويورك أبو ظبي تنشر أول أطلس لكوكب المريخ باللغة العربية" -f raw -b r13 -d bert -m catib -t catib6 
 
 
