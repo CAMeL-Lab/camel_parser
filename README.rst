@@ -47,7 +47,7 @@ Passing cleaned and whitespace tokenized text
     
     python text_to_conll_cli.py -s "جامعة نيويورك أبو ظبي تنشر أول أطلس لكوكب المريخ باللغة العربية." -f tokenized
 
-*Note that the difference between the -f raw and tokenized parser input settings is that for raw we use different utilities from CAMeL Tools to* `normalize unicode <https://camel-tools.readthedocs.io/en/latest/api/utils/normalize.html?highlight=normalize_unicode#camel_tools.utils.normalize.normalize_unicode>`_, `dediactritize <https://camel-tools.readthedocs.io/en/latest/api/utils/dediac.html?highlight=dediac_ar>`_, *clean the text using* `arclean <https://camel-tools.readthedocs.io/en/latest/api/utils/charmap.html?highlight=arclean#utility>`_, *and perform* `whitespace tokenization <https://camel-tools.readthedocs.io/en/latest/api/tokenizers/word.html?highlight=simple_word_tokenize#camel_tools.tokenizers.word.simple_word_tokenize>`_.*
+*Note that the difference between the -f raw and tokenized parser input settings is that for raw we use different utilities from CAMeL Tools to* `normalize unicode <https://camel-tools.readthedocs.io/en/latest/api/utils/normalize.html?highlight=normalize_unicode#camel_tools.utils.normalize.normalize_unicode>`_, `dediactritize <https://camel-tools.readthedocs.io/en/latest/api/utils/dediac.html?highlight=dediac_ar>`_, *clean the text using* `arclean <https://camel-tools.readthedocs.io/en/latest/api/utils/charmap.html?highlight=arclean#utility>`_, *and perform* `whitespace tokenization <https://camel-tools.readthedocs.io/en/latest/api/tokenizers/word.html?highlight=simple_word_tokenize#camel_tools.tokenizers.word.simple_word_tokenize>`_.
 
 When the text has already been tokenized, parse_tok can be used
 
