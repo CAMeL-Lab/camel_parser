@@ -20,9 +20,9 @@ Options:
         The type of file passed. Could be 
             conll: conll
             raw: raw text
-            tokenized: whitespace tokenized text
-            tok_tagged: tokenized and POS tagged text
-            parse_tok: only parse tokenized input; don't disambiguate to add POS tags or features
+            tokenized: whitespace tokenized text (text will not be cleaned)
+            tok_tagged: text is already tokenized and POS tagged
+            parse_tok: text is already tokenized, only parse tokenized input; don't disambiguate to add POS tags or features
     -b <morphology_db> --morphology_db=<morphology_db>
         The morphology database to use; will use camel_tools built-in by default [default: r13]
     -d <disambiguator> --disambiguator=<disambiguator>
