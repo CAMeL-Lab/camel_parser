@@ -24,8 +24,10 @@ To install the required packages, run
 
     pip install -r requirements.txt
 
+*On the first run of the code, two Arabic script models will be downloaded from Hugging Face; CATiB and UD.*
+
 Examples
-------------
+--------
 Parsing a single sentence
 
 .. code-block:: bash
@@ -37,7 +39,7 @@ Parsing a single sentence
 
 
 Using another morphology database
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+---------------------------------
 
 Curently, the CamelParser uses CAMeLTools' default morphology database, the morphology-db-msa-r13.
 
