@@ -17,14 +17,15 @@ For disambiguation, users can choose between the BERT unfactored disambiguator, 
 
 Installation
 ------------
+1. Clone this repo
 
-To install the required packages, run
+2. Install the required packages:
 
 .. code-block:: bash
 
     pip install -r requirements.txt
 
-*On the first run of the code, two Arabic script models will be downloaded from Hugging Face; CATiB and UD.*
+*When running the code for the first time, two Arabic script models will be downloaded from Hugging Face; CATiB and UD.*
 
 Examples
 --------
