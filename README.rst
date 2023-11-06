@@ -33,14 +33,21 @@ Parsing a single sentence
 
 .. code-block:: bash
     
-    python text_to_conll_cli.py -s "جامعة نيويورك أبو ظبي تنشر أول أطلس لكوكب المريخ باللغة العربية" -f raw
+    python text_to_conll_cli.py -s "جامعة نيويورك أبو ظبي تنشر أول أطلس لكوكب المريخ باللغة العربية." -f raw
 
-The verbose version of the above example (default values are shown):
+The verbose version of the above example (default values are shown)
 
 .. code-block:: bash
 
     python text_to_conll_cli.py -s "جامعة نيويورك أبو ظبي تنشر أول أطلس لكوكب المريخ باللغة العربية" -f raw -b r13 -d bert -m catib -t catib6 
 
+Passing cleaned and whitespace tokenized text
+
+.. code-block:: bash
+    
+    python text_to_conll_cli.py -s "جامعة نيويورك أبو ظبي تنشر أول أطلس لكوكب المريخ باللغة العربية." -f tokenized
+
+Note that the difference between the raw and tokenized parser input settings is that for raw we use different utilities from CAMeL Tools to `normalize unicode https://camel-tools.readthedocs.io/en/latest/api/utils/normalize.html?highlight=normalize_unicode#camel_tools.utils.normalize.normalize_unicode`_, `dediactritize https://camel-tools.readthedocs.io/en/latest/api/utils/dediac.html?highlight=dediac_ar`_, clean the text using `arclean https://camel-tools.readthedocs.io/en/latest/api/utils/charmap.html?highlight=arclean#utility`_, and perform `whitespace tokenization https://camel-tools.readthedocs.io/en/latest/api/tokenizers/word.html?highlight=simple_word_tokenize#camel_tools.tokenizers.word.simple_word_tokenize`_.
 
 Using another morphology database
 ---------------------------------
