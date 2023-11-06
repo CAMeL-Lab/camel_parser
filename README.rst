@@ -35,8 +35,8 @@ Parsing a single sentence
     
     python text_to_conll_cli.py -s "جامعة نيويورك أبو ظبي تنشر أول أطلس لكوكب المريخ باللغة العربية" -f raw
 
-    # the verbose version (including default values):
-    python text_to_conll_cli.py -s "جامعة نيويورك أبو ظبي تنشر أول أطلس لكوكب المريخ باللغة العربية" -f raw -b r13 -d bert -m catib -t catib6 -log True 
+    # the verbose version of the above example (default values are shown):
+    python text_to_conll_cli.py -s "جامعة نيويورك أبو ظبي تنشر أول أطلس لكوكب المريخ باللغة العربية" -f raw -b r13 -d bert -m catib -t catib6 
 
 
 Using another morphology database
