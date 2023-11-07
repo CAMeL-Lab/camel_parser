@@ -86,9 +86,15 @@ def merge_tuples(parsed_tuples, sent_tuples):
 
 def parse_tok_pos(sent):
     sentence_tuples = []
-    for tup in sent.split(' '):
-        pair = tuple(tup.strip()[1:-1].split(','))
-        sentence_tuples.append(pair)
+    
+    # split on space, and using positive lookbehind and lookahead
+    # to detect parentheses around the space
+    for tup in re.split(r'(?<=\)) (?=\()', sent.strip()):
+        tup_items = tup[1:-1]
+        form = (','.join(tup_items.split(',')[:-1])).strip() # account for comma tokens
+        pos = (tup_items.split(',')[-1]).strip()
+        sentence_tuples.append((form, pos))
+
     return sentence_tuples
 
 def get_file_type(file_type):
