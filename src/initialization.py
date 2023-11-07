@@ -12,18 +12,18 @@ def setup_parsing_model(parse_model, model_path: Path):
 
     # check if default models exist
     if not os.path.exists(model_path / "CAMeLBERT-CATiB-biaffine.model"):
-        print('downloading catib model')
+        # print('downloading catib model')
         hf_hub_download(repo_id="CAMeL-Lab/camelbert-catib-parser", filename="CAMeLBERT-CATiB-biaffine.model", local_dir=model_path)
     if not os.path.exists(model_path / "CAMeLBERT-UD-biaffine.model"):
-        print('downloading ud model')
+        # print('downloading ud model')
         hf_hub_download(repo_id="CAMeL-Lab/camelbert-ud-parser", filename="CAMeLBERT-UD-biaffine.model", local_dir=model_path)
 
     if parse_model == "catib":
-        print('using catib model')
+        # print('using catib model')
         return "CAMeLBERT-CATiB-biaffine.model"
     elif parse_model == "ud":
-        print('using ud model')
+        # print('using ud model')
         return "CAMeLBERT-UD-biaffine.model"
     else:
-        print(f'using f{parse_model}')
+        # print(f'using f{parse_model}')
         return parse_model
