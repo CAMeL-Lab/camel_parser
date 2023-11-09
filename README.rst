@@ -52,11 +52,13 @@ Passing cleaned and whitespace tokenized text
 parse_tok is used when 1) the text has already been tokenized, and 2) only dependency relations are needed; the POS tags and features will not be generated.
 
 .. code-block:: bash
+    
     python text_to_conll_cli.py -s "جامعة نيويورك أبو ظبي تنشر أول أطلس ل+ كوكب المريخ ب+ اللغة العربية ." -f parse_tok
 
 tok_tagged is used when the user has the tokens and POS tags. They should be passed as tuples.
 
 .. code-block:: bash
+    
     python text_to_conll_cli.py -s "(جامعة, NOM) (نيويورك, PROP) (أبو, PROP) (ظبي, PROP) (تنشر, VRB) (أول, NOM) (أطلس, NOM) (ل+, PRT) (كوكب, NOM) (المريخ, PROP) (ب+, PRT) (اللغة, NOM) (العربية, NOM) (., PNX)" -f tok_tagged
 
 
