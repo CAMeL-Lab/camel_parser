@@ -21,7 +21,7 @@ Options:
             conll: conll
             raw: raw text
             tokenized: whitespace tokenized text (text will not be cleaned)
-            tok_tagged: text is already tokenized and POS tagged
+            tok_tagged: text is already tokenized and POS tagged, in tuple form
             parse_tok: text is already tokenized, only parse tokenized input; don't disambiguate to add POS tags or features
     -b <morphology_db> --morphology_db=<morphology_db>
         The morphology database to use; will use camel_tools built-in by default [default: r13]
@@ -96,6 +96,13 @@ def parse_tok_pos(sent):
         sentence_tuples.append((form, pos))
 
     return sentence_tuples
+
+def token_tuples_to_sentences(tok_pos_tuples):
+    sentences = []
+    for sentence_tuples in tok_pos_tuples:
+        sentence = ' '.join([tok_pos_tuple[0] for tok_pos_tuple in sentence_tuples])
+        sentences.append(sentence)
+    return sentences
 
 def get_file_type(file_type):
     if file_type in ['conll', 'raw', 'tokenized', 'tok_tagged', 'parse_tok']:
@@ -185,7 +192,9 @@ def main():
     elif file_type == 'parse_tok':
         sentence_tuples = [[(0, tok, '_' ,'UNK') for tok in line.strip().split(' ')] for line in lines]
     elif file_type == 'tok_tagged':
-        sentence_tuples =  [[(0, tup[0],'_' ,tup[1]) for tup in parse_tok_pos(line)] for line in lines]
+        tok_pos_tuples_list = [parse_tok_pos(line) for line in lines]
+        lines = token_tuples_to_sentences(tok_pos_tuples_list)
+        sentence_tuples = [[(0, tup[0],'_' ,tup[1]) for tup in tok_pos_tuples] for tok_pos_tuples in tok_pos_tuples_list]
 
     et = time.time()
     logs["input preparation"] = et-st
