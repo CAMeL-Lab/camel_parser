@@ -29,7 +29,7 @@ Installation
 
 Examples
 --------
-Parsing a single sentence
+Below are examples using the different inputs that CamelParser accepts. We pass each example as a string using -s. However, when passing multiple sentences it is better to use -i along with the path to the file containing the sentences.
 
 .. code-block:: bash
     
@@ -39,7 +39,7 @@ The verbose version of the above example (default values are shown)
 
 .. code-block:: bash
 
-    python text_to_conll_cli.py -s "جامعة نيويورك أبو ظبي تنشر أول أطلس لكوكب المريخ باللغة العربية" -f raw -b r13 -d bert -m catib -t catib6 
+    python text_to_conll_cli.py -s "جامعة نيويورك أبو ظبي تنشر أول أطلس لكوكب المريخ باللغة العربية." -f raw -b r13 -d bert -m catib -t catib6 
 
 Passing cleaned and whitespace tokenized text
 
@@ -49,10 +49,17 @@ Passing cleaned and whitespace tokenized text
 
 *Note that the difference between the -f raw and tokenized parser input settings is that for raw we use different utilities from CAMeL Tools to* `normalize unicode <https://camel-tools.readthedocs.io/en/latest/api/utils/normalize.html?highlight=normalize_unicode#camel_tools.utils.normalize.normalize_unicode>`_, `dediactritize <https://camel-tools.readthedocs.io/en/latest/api/utils/dediac.html?highlight=dediac_ar>`_, *clean the text using* `arclean <https://camel-tools.readthedocs.io/en/latest/api/utils/charmap.html?highlight=arclean#utility>`_, *and perform* `whitespace tokenization <https://camel-tools.readthedocs.io/en/latest/api/tokenizers/word.html?highlight=simple_word_tokenize#camel_tools.tokenizers.word.simple_word_tokenize>`_.
 
-When the text has already been tokenized, parse_tok can be used
+parse_tok is used when 1) the text has already been tokenized, and 2) only dependency relations are needed; the POS tags and features will not be generated.
 
 .. code-block:: bash
-    python text_to_conll_cli.py -s "جامعة نيويورك أبو ظبي تنشر أول أطلس ل+ كوكب المريخ ب+ اللغة العربية" -f parse_tok
+    python text_to_conll_cli.py -s "جامعة نيويورك أبو ظبي تنشر أول أطلس ل+ كوكب المريخ ب+ اللغة العربية ." -f parse_tok
+
+tok_tagged is used when the user has the tokens and POS tags. They should be passed as tuples.
+
+.. code-block:: bash
+    python text_to_conll_cli.py -s "(جامعة, NOM) (نيويورك, PROP) (أبو, PROP) (ظبي, PROP) (تنشر, VRB) (أول, NOM) (أطلس, NOM) (ل+, PRT) (كوكب, NOM) (المريخ, PROP) (ب+, PRT) (اللغة, NOM) (العربية, NOM) (., PNX)" -f tok_tagged
+
+
 
 Using another morphology database
 ---------------------------------
