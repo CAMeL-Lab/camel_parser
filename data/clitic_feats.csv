@@ -60,6 +60,7 @@ prc1:la_emph,l,PRT,part,clitic,0,0,0,na,na,na,na,na,na,na,na,na,0,na
 prc1:la_prep,l,PRT,prep,clitic,0,0,0,na,na,na,na,na,na,na,na,na,0,na
 prc1:la_rc,l,PRT,part,clitic,0,0,0,na,na,na,na,na,na,na,na,na,0,na
 prc1:li_jus,l,PRT,part_verb,clitic,0,0,0,na,na,na,na,na,na,na,na,na,0,na
+prc1:li_conj,l,PRT,conj,clitic,0,0,0,na,na,na,na,na,na,na,na,na,0,na
 prc1:li_sub,l,PRT,conj_sub,clitic,0,0,0,na,na,na,na,na,na,na,na,na,0,na
 prc1:li_prep,l,PRT,prep,clitic,0,0,0,na,na,na,na,na,na,na,na,na,0,na
 prc1:sa_fut,s,PRT,part_fut,clitic,0,0,0,na,na,na,na,na,na,na,na,na,0,na

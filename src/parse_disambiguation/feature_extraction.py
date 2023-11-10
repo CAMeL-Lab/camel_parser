@@ -61,6 +61,34 @@ def empty_clitic_feats_from_baseword(stem_feats):
     return stem_feats
     
 
+def r13_fixes(token, stem_feats):
+    # handling edge cases where li comes from variations of wa li>n (i.e. li>nhu, li>nanY)
+    li_feats = {'pos': 'conj_sub', 'prc3': '0', 'prc2': 'wa_conj', 'prc1': '0', 'prc0': 'na', 'enc0': '3ms_pron', 'asp': 'na', 'vox': 'na', 'mod': 'na', 'gen': 'na', 'num': 'na', 'stt': 'na', 'cas': 'na', 'per': 'na', 'rat': 'na'}
+    if {k for k, _ in stem_feats.items() ^ li_feats.items()} == {'enc0'}:
+        stem_feats['prc1'] = 'li_conj'
+    
+    # handling edge cases where li comes from variations of li>n (i.e. li>nhu, li>nanY)
+    li_feats = {'pos': 'conj_sub', 'prc3': '0', 'prc2': '0', 'prc1': '0', 'prc0': 'na', 'enc0': '0', 'asp': 'na', 'vox': 'na', 'mod': 'na', 'gen': 'na', 'num': 'na', 'stt': 'na', 'cas': 'na', 'per': 'na', 'rat': 'na'}
+    if {k for k, _ in stem_feats.items() ^ li_feats.items()} == {'enc0'}:
+        stem_feats['prc1'] = 'li_conj'
+        
+    # handling edge cases where li comes from li>n
+    if token == 'لِ+' and stem_feats == {'pos': 'conj_sub', 'prc3': '0', 'prc2': '0', 'prc1': '0', 'prc0': 'na', 'enc0': '0', 'asp': 'na', 'vox': 'na', 'mod': 'na', 'gen': 'na', 'num': 'na', 'stt': 'na', 'cas': 'na', 'per': 'na', 'rat': 'na'}:
+            stem_feats['prc1'] = 'li_conj'
+    
+    # handling edge cases where li comes from wa li>n
+    if token == 'لِ+' and stem_feats == {'pos': 'conj_sub', 'prc3': '0', 'prc2': 'wa_conj', 'prc1': '0', 'prc0': 'na', 'enc0': '3ms_pron', 'asp': 'na', 'vox': 'na', 'mod': 'na', 'gen': 'na', 'num': 'na', 'stt': 'na', 'cas': 'na', 'per': 'na', 'rat': 'na'}:
+            stem_feats['prc1'] = 'li_conj'
+    
+    # handling edge cases where mA comes from qlmA
+    if token == '+ما' and stem_feats == {'pos': 'conj', 'prc3': '0', 'prc2': '0', 'prc1': '0', 'prc0': 'na', 'enc0': '0', 'asp': 'na', 'vox': 'na', 'mod': 'na', 'gen': 'na', 'num': 'na', 'stt': 'na', 'cas': 'na', 'per': 'na', 'rat': 'n'}:
+            stem_feats['enc0'] = 'mA_sub'
+    
+    # handling an edge case where li comes from likY
+    # added li_conj to clitic_feats.csv
+    if token == 'لِ+' and stem_feats == {'pos': 'conj', 'prc3': '0', 'prc2': '0', 'prc1': '0', 'prc0': 'na', 'enc0': '0', 'asp': 'na', 'vox': 'na', 'mod': 'na', 'gen': 'na', 'num': 'na', 'stt': 'na', 'cas': 'na', 'per': 'na', 'rat': 'na'}:
+        stem_feats['prc1'] = 'li_conj'
+
 def add_remaining_features(tokens_df, stem_feats, clitic_feats):
     existing_clitics = ['prc0']
 
@@ -77,6 +105,9 @@ def add_remaining_features(tokens_df, stem_feats, clitic_feats):
             # handling an edge case where lA is negative
             if token == 'لِ+' and stem_feats == {'pos': 'conj_sub', 'prc3': '0', 'prc2': '0', 'prc1': '0', 'prc0': 'na', 'enc0': 'lA_neg', 'asp': 'na', 'vox': 'na', 'mod': 'na', 'gen': 'na', 'num': 'na', 'stt': 'na', 'cas': 'na', 'per': 'na', 'rat': 'na'}:
                     stem_feats['prc1'] = 'li_prep'
+            
+            r13_fixes(token, stem_feats)
+            
             clitic_feats_list.append(get_clitic_feats(token.replace('+', ''), clitic_order, clitic_feats, stem_feats))
 
     feats_df = pd.DataFrame(clitic_feats_list)
@@ -106,7 +137,16 @@ def get_main_features_df(word_analysis):
         ud = word_analysis['ud'].split('+')
         lemmas = get_lemmas(word_analysis['lex'], tokens)
     
-    return pd.DataFrame({'token': tokens, 'catib6': catib6, 'ud': ud, 'lemma': lemmas})
+    if len(catib6) < len(tokens):
+        print(tokens)
+        print(catib6)
+        catib6.append("NOM")
+        ud.append("NOUN")
+        return pd.DataFrame({'token': tokens, 'catib6': catib6, 'ud': ud, 'lemma': lemmas})
+    try:
+        return pd.DataFrame({'token': tokens, 'catib6': catib6, 'ud': ud, 'lemma': lemmas})
+    except:
+        import pdb; pdb.set_trace()
 
 def get_word_features_df(word_analysis, clitic_feats):
     """if a word is composed of multiple tokens, return them all.
