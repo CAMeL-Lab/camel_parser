@@ -134,14 +134,11 @@ def main():
     logs = {}
     if log:
         log_file = "log-"+datetime.now().strftime("%d-%m-%Y-%H:%M:%S")
-    if file_type == 'conll':
-        parse_conll(file_path, logs=logs, parse_model=model_path/model_name)
-        if log:
-            with open("./logs/"+log_file,'w') as f:
-                for key, value in logs.items():   
-                    f.write('%s = %s\n' % (key, value))
-        return
-
+    
+    #
+    ### Set up parsing model
+    #
+    model_name = setup_parsing_model(parse_model, model_path=model_path)
 
     st = time.time()
     
@@ -156,11 +153,6 @@ def main():
     db = MorphologyDB.builtin_db(db_name=db_type)
     analyzer = Analyzer(db=db, backoff='ADD_PROP', cache_size=100000)
     disambiguator = get_disambiguator(disambiguator_type, analyzer)
-    
-    #
-    ### Set up parsing model
-    #
-    model_name = setup_parsing_model(parse_model, model_path=model_path)
     
     
     #
@@ -183,7 +175,14 @@ def main():
 
     st = time.time()
     sentence_tuples = []
-    if file_type in ['raw', 'tokenized']:
+    if file_type == 'conll':
+        parse_conll(file_path, logs=logs, parse_model=model_path/model_name)
+        if log:
+            with open("./logs/"+log_file,'w') as f:
+                for key, value in logs.items():   
+                    f.write('%s = %s\n' % (key, value))
+        return
+    elif file_type in ['raw', 'tokenized']:
         # clean lines for raw only
         token_lines = clean_lines(lines, arclean) if file_type == 'raw' else split_lines_words(lines)
         disambiguated_sentences: List[List[DisambiguatedWord]] = disambiguator.disambiguate_sentences(token_lines)
