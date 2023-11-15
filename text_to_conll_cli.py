@@ -72,16 +72,42 @@ def print_to_conll(sentence_tuples, annotations=None, sentences=None):
             [print(annotation) for annotation in annotations[i]]
         print("\n".join(["\t".join([str(i) for i in tup]) for tup in sentence_tuples[i]])+"\n")
 
-def merge_tuples(doc_parsed_tuples, doc_sent_tuples):
-    doc_merged_tuples = []
-    for parsed_tuples, sent_tuples in zip(doc_parsed_tuples, doc_sent_tuples):
-        merged_tuples = []
-        for parsed_tuple, sent_tuple in zip(parsed_tuples, sent_tuples):
-            # get first 5 and last 4 items from parsed tuple using lists, and add features from
-            # sent_tuple[5]. Then convert the whole thing to a tuple using ()
-            merged_tuples.append((list(parsed_tuple[:5]) + [sent_tuple[5]] + list(parsed_tuple[6:])))
-        doc_merged_tuples.append(merged_tuples)    
-    return doc_merged_tuples
+def get_feats_from_text_tuples(text_tuples: List[List[tuple]]) -> List[List[str]]:
+    """Extract the FEATS columns from the unparsed data.
+    FEATS will exist only for text and pre-processed text inputs.
+
+    Args:
+        text_tuples (List[List[tuple]]): unparsed data
+
+    Returns:
+        List[List[str]]: the FEATS column (or _ if it does not exist)
+    """
+    return [[col_items[5] for col_items in tup_list] for tup_list in text_tuples]
+
+def add_feats(text_tuples: List[List[tuple]], text_feats: List[List[str]]) -> List[List[tuple]]:
+    """Add FEATS data to the text tuples.
+    The parent list (text_tuples) is a list of sentences.
+    Each sentence is a list of tuples.
+    Each tuple represents a token.
+
+    Args:
+        text_tuples (List[List[tuple]]): list of list of tuples
+        text_feats (List[List[str]]): list of list of FEATS
+
+    Returns:
+        List[List[tuple]]: text_tuples but with the FEATS column filled
+    """
+    text_tuples_with_feats = []
+    for sentence_tuples, sentence_feats in zip(text_tuples, text_feats):
+        
+        # get first 5 and last 4 items from parsed tuple using lists, and add features from
+        # sent_tuple[5]. Then convert the whole thing to a tuple using ()
+        merged_tuples = [
+            list(token_tuple[:5]) + [token_feats] + list(token_tuple[6:])
+            for token_tuple, token_feats in zip(sentence_tuples, sentence_feats)
+        ]
+        text_tuples_with_feats.append(merged_tuples)
+    return text_tuples_with_feats
 
 def string_to_tuple_list(string_of_tuples: str) -> List(tuple[str, str]):
     """Take a string of space-separated tuples and convert it to a tuple list.
@@ -187,10 +213,9 @@ def main():
         elif file_type == 'tok_tagged':
             tok_pos_tuples_list = [string_to_tuple_list(line) for line in lines]
             lines = token_tuples_to_sentences(tok_pos_tuples_list)
-            sentence_tuples = [[(0, tup[0],'_' ,tup[1]) for tup in tok_pos_tuples] for tok_pos_tuples in tok_pos_tuples_list]
-
-        parsed_tuples = parse_tuples(sentence_tuples, parse_model=model_path/model_name)
-        parsed_tuples = merge_tuples(parsed_tuples, sentence_tuples)
+        
+        text_feats: List[List[str]] = get_feats_from_text_tuples(text_tuples)
+        parsed_tuples = add_feats(parsed_tuples, text_feats)
 
     print_to_conll(parsed_tuples, sentences=lines)
 
