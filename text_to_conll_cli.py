@@ -109,7 +109,7 @@ def add_feats(text_tuples: List[List[tuple]], text_feats: List[List[str]]) -> Li
         text_tuples_with_feats.append(merged_tuples)
     return text_tuples_with_feats
 
-def string_to_tuple_list(string_of_tuples: str) -> List(tuple[str, str]):
+def string_to_tuple_list(string_of_tuples: str) -> List[tuple[str, str]]:
     """Take a string of space-separated tuples and convert it to a tuple list.
     Example input: '(جامعة, NOM) (نيويورك, PROP)'
     Example output: [(جامعة, NOM), (نيويورك, PROP)]
