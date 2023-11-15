@@ -48,7 +48,7 @@ from src.initialization import setup_parsing_model
 from src.parse_disambiguation.disambiguation_analysis import to_sentence_analysis_list
 from src.parse_disambiguation.feature_extraction import to_sentence_features_list
 from src.text_cleaner import clean_lines, split_lines_words
-from src.biaff_parser import parse_tuples, parse_conll
+from src.biaff_parser import parse_text_tuples, parse_conll
 from docopt import docopt
 from transformers.utils import logging
 from datetime import datetime
@@ -198,7 +198,7 @@ def main():
         with open(file_path, 'r') as f:
             lines = [line for line in f.readlines() if line.strip()]
 
-    sentence_tuples = []
+    text_tuples: List[List[tuple]] = []
     if file_type == 'conll':
         parsed_tuples = parse_conll(file_path, parse_model=model_path/model_name)
     else:
@@ -207,15 +207,18 @@ def main():
             token_lines = clean_lines(lines, arclean) if file_type == 'raw' else split_lines_words(lines)
             disambiguated_sentences: List[List[DisambiguatedWord]] = disambiguator.disambiguate_sentences(token_lines)
             sentence_analysis_list: List[List[dict]] = to_sentence_analysis_list(disambiguated_sentences)
-            sentence_tuples: List[List[tuple]] = to_sentence_features_list(sentence_analysis_list, clitic_feats_df, tagset)
+            text_tuples = to_sentence_features_list(sentence_analysis_list, clitic_feats_df, tagset)
         elif file_type == 'parse_tok':
-            sentence_tuples = [[(0, tok, '_' ,'UNK') for tok in line.strip().split(' ')] for line in lines]
+            text_tuples = [[(0, tok, '_' ,'UNK') for tok in line.strip().split(' ')] for line in lines]
         elif file_type == 'tok_tagged':
             tok_pos_tuples_list = [string_to_tuple_list(line) for line in lines]
             lines = token_tuples_to_sentences(tok_pos_tuples_list)
+            text_tuples = [[(0, tup[0],'_' ,tup[1]) for tup in tok_pos_tuples] for tok_pos_tuples in tok_pos_tuples_list]
+
+        parsed_text_tuples = parse_text_tuples(text_tuples, parse_model=model_path/model_name)
         
         text_feats: List[List[str]] = get_feats_from_text_tuples(text_tuples)
-        parsed_tuples = add_feats(parsed_tuples, text_feats)
+        parsed_text_tuples = add_feats(parsed_text_tuples, text_feats)
 
     print_to_conll(parsed_tuples, sentences=lines)
 

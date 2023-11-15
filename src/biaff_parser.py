@@ -37,7 +37,7 @@ def parse(conll_path_or_parsed_tuples: Union[List[List[tuple]], str], parse_mode
         logs["Parsing prediction"] = et-st
     return conll
 
-def parse_tuples(sentence_tuples: List[List[tuple]], parse_model, logs: Dict[str, float] =  None) -> List[List[tuple]]:
+def parse_text_tuples(sentence_tuples: List[List[tuple]], parse_model, logs: Dict[str, float] =  None) -> List[List[tuple]]:
     sentence_tuples = [[val[1:4] for val in sent] for sent in sentence_tuples]
     form_lemma_pos_tuple = [[(filter_tatweel(dediac_ar(val[0])), filter_tatweel(dediac_ar(val[1])), val[2]) for val in sent] for sent in sentence_tuples]
     conll = parse(form_lemma_pos_tuple, parse_model=parse_model, logs = logs)
