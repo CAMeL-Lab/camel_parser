@@ -72,19 +72,16 @@ def print_to_conll(sentence_tuples, annotations=None, sentences=None):
             [print(annotation) for annotation in annotations[i]]
         print("\n".join(["\t".join([str(i) for i in tup]) for tup in sentence_tuples[i]])+"\n")
 
-def merge_tuples(parsed_tuples, sent_tuples):
-    merged_tuples = []
-    for i, sent in enumerate(parsed_tuples):
-        col_list = []
-        for j, col in enumerate(sent_tuples[i]):
-            if j != 6 and j!= 7:
-                col_list.append(col)
-            else:
-                col_list.append(sent[j])
-        merged_tuples.append(tuple(col_list))
-    return merged_tuples
-
-def parse_tok_pos(sent):
+def merge_tuples(doc_parsed_tuples, doc_sent_tuples):
+    doc_merged_tuples = []
+    for parsed_tuples, sent_tuples in zip(doc_parsed_tuples, doc_sent_tuples):
+        merged_tuples = []
+        for parsed_tuple, sent_tuple in zip(parsed_tuples, sent_tuples):
+            # get first 5 and last 4 items from parsed tuple using lists, and add features from
+            # sent_tuple[5]. Then convert the whole thing to a tuple using ()
+            merged_tuples.append((list(parsed_tuple[:5]) + [sent_tuple[5]] + list(parsed_tuple[6:])))
+        doc_merged_tuples.append(merged_tuples)    
+    return doc_merged_tuples
     sentence_tuples = []
     
     # split on space, and using positive lookbehind and lookahead
@@ -123,18 +120,10 @@ def main():
     morphology_db = arguments['--morphology_db']
     disambiguator_type = arguments['--disambiguator']
     parse_model = arguments['--model']
-    log = arguments['--log']
+    # log = arguments['--log']
     tagset = arguments['--tagset']
 
 
-    #
-    ### Set up logger
-    #
-    log_file = None
-    logs = {}
-    if log:
-        log_file = "log-"+datetime.now().strftime("%d-%m-%Y-%H:%M:%S")
-    
     #
     ### Set up parsing model
     #
@@ -170,10 +159,7 @@ def main():
     elif file_path is not None:
         with open(file_path, 'r') as f:
             lines = [line for line in f.readlines() if line.strip()]
-    et = time.time()
-    logs["reading input"] = et-st
 
-    st = time.time()
     sentence_tuples = []
     if file_type == 'conll':
         parse_conll(file_path, logs=logs, parse_model=model_path/model_name)
@@ -195,18 +181,9 @@ def main():
         lines = token_tuples_to_sentences(tok_pos_tuples_list)
         sentence_tuples = [[(0, tup[0],'_' ,tup[1]) for tup in tok_pos_tuples] for tok_pos_tuples in tok_pos_tuples_list]
 
-    et = time.time()
-    logs["input preparation"] = et-st
-    parsed_tuples = parse_tuples(sentence_tuples, logs=logs, parse_model=model_path/model_name)
-    st = time.time()
-    # print_to_conll(merge_tuples(parsed_tuples, sentence_tuples), sentences=lines)
-    print_to_conll(parsed_tuples, sentences=lines)
-    et = time.time()
-    logs["printing to conll"] = et-st
-    if log:
-        with open("./logs/"+log_file,'w') as f:
-            for key, value in logs.items(): 
-                f.write('%s = %s\n' % (key, value))
+        parsed_tuples = parse_tuples(sentence_tuples, parse_model=model_path/model_name)
+
+    print_to_conll(merge_tuples(parsed_tuples, sentence_tuples), sentences=lines)
 
 if __name__ == '__main__':
     main()
