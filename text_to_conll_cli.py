@@ -82,16 +82,28 @@ def merge_tuples(doc_parsed_tuples, doc_sent_tuples):
             merged_tuples.append((list(parsed_tuple[:5]) + [sent_tuple[5]] + list(parsed_tuple[6:])))
         doc_merged_tuples.append(merged_tuples)    
     return doc_merged_tuples
+
+def string_to_tuple_list(string_of_tuples: str) -> List(tuple[str, str]):
+    """Take a string of space-separated tuples and convert it to a tuple list.
+    Example input: '(جامعة, NOM) (نيويورك, PROP)'
+    Example output: [(جامعة, NOM), (نيويورك, PROP)]
+
+    Args:
+        string_of_tuples (str): string of tuples
+
+    Returns:
+        List(tuple[str, str]): list of token-pos tuple pairs
+    """
     sentence_tuples = []
     
     # split on space, and using positive lookbehind and lookahead
     # to detect parentheses around the space
-    for tup in re.split(r'(?<=\)) (?=\()', sent.strip()):
-        tup_items = tup[1:-1]
+    for tup in re.split(r'(?<=\)) (?=\()', string_of_tuples.strip()):
+        # tup = (جامعة, NOM)
+        tup_items = tup[1:-1] # removes parens
         form = (','.join(tup_items.split(',')[:-1])).strip() # account for comma tokens
         pos = (tup_items.split(',')[-1]).strip()
         sentence_tuples.append((form, pos))
-
     return sentence_tuples
 
 def token_tuples_to_sentences(tok_pos_tuples):
@@ -173,7 +185,7 @@ def main():
         elif file_type == 'parse_tok':
             sentence_tuples = [[(0, tok, '_' ,'UNK') for tok in line.strip().split(' ')] for line in lines]
         elif file_type == 'tok_tagged':
-            tok_pos_tuples_list = [parse_tok_pos(line) for line in lines]
+            tok_pos_tuples_list = [string_to_tuple_list(line) for line in lines]
             lines = token_tuples_to_sentences(tok_pos_tuples_list)
             sentence_tuples = [[(0, tup[0],'_' ,tup[1]) for tup in tok_pos_tuples] for tok_pos_tuples in tok_pos_tuples_list]
 
