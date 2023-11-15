@@ -100,10 +100,10 @@ def add_feats(text_tuples: List[List[tuple]], text_feats: List[List[str]]) -> Li
     text_tuples_with_feats = []
     for sentence_tuples, sentence_feats in zip(text_tuples, text_feats):
         
-        # get first 5 and last 4 items from parsed tuple using lists, and add features from
-        # sent_tuple[5]. Then convert the whole thing to a tuple using ()
+        # get first 5 and last 4 items from parsed tuple using lists, and add features.
+        # Convert the list of fields to a tuple
         merged_tuples = [
-            list(token_tuple[:5]) + [token_feats] + list(token_tuple[6:])
+            tuple(list(token_tuple[:5]) + [token_feats] + list(token_tuple[6:]))
             for token_tuple, token_feats in zip(sentence_tuples, sentence_feats)
         ]
         text_tuples_with_feats.append(merged_tuples)
