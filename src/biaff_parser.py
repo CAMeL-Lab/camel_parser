@@ -47,5 +47,4 @@ def parse_conll(conll_path: str, parse_model, logs: Dict[str, float] = None) -> 
     conll = parse(conll_path, parse_model=parse_model, logs=logs)
     for i, sent in enumerate(conll):
         conll[i].values[1] = [filter_tatweel(form) for form in sent.values[1]]
-    [print(sent) for sent in conll]
-    return
+    return conll_to_parsed_tuples(conll)

@@ -162,28 +162,25 @@ def main():
 
     sentence_tuples = []
     if file_type == 'conll':
-        parse_conll(file_path, logs=logs, parse_model=model_path/model_name)
-        if log:
-            with open("./logs/"+log_file,'w') as f:
-                for key, value in logs.items():   
-                    f.write('%s = %s\n' % (key, value))
-        return
-    elif file_type in ['raw', 'tokenized']:
-        # clean lines for raw only
-        token_lines = clean_lines(lines, arclean) if file_type == 'raw' else split_lines_words(lines)
-        disambiguated_sentences: List[List[DisambiguatedWord]] = disambiguator.disambiguate_sentences(token_lines)
-        sentence_analysis_list: List[List[dict]] = to_sentence_analysis_list(disambiguated_sentences)
-        sentence_tuples: List[List[tuple]] = to_sentence_features_list(sentence_analysis_list, clitic_feats_df, tagset)
-    elif file_type == 'parse_tok':
-        sentence_tuples = [[(0, tok, '_' ,'UNK') for tok in line.strip().split(' ')] for line in lines]
-    elif file_type == 'tok_tagged':
-        tok_pos_tuples_list = [parse_tok_pos(line) for line in lines]
-        lines = token_tuples_to_sentences(tok_pos_tuples_list)
-        sentence_tuples = [[(0, tup[0],'_' ,tup[1]) for tup in tok_pos_tuples] for tok_pos_tuples in tok_pos_tuples_list]
+        parsed_tuples = parse_conll(file_path, parse_model=model_path/model_name)
+    else:
+        if file_type in ['raw', 'tokenized']:
+            # clean lines for raw only
+            token_lines = clean_lines(lines, arclean) if file_type == 'raw' else split_lines_words(lines)
+            disambiguated_sentences: List[List[DisambiguatedWord]] = disambiguator.disambiguate_sentences(token_lines)
+            sentence_analysis_list: List[List[dict]] = to_sentence_analysis_list(disambiguated_sentences)
+            sentence_tuples: List[List[tuple]] = to_sentence_features_list(sentence_analysis_list, clitic_feats_df, tagset)
+        elif file_type == 'parse_tok':
+            sentence_tuples = [[(0, tok, '_' ,'UNK') for tok in line.strip().split(' ')] for line in lines]
+        elif file_type == 'tok_tagged':
+            tok_pos_tuples_list = [parse_tok_pos(line) for line in lines]
+            lines = token_tuples_to_sentences(tok_pos_tuples_list)
+            sentence_tuples = [[(0, tup[0],'_' ,tup[1]) for tup in tok_pos_tuples] for tok_pos_tuples in tok_pos_tuples_list]
 
         parsed_tuples = parse_tuples(sentence_tuples, parse_model=model_path/model_name)
+        parsed_tuples = merge_tuples(parsed_tuples, sentence_tuples)
 
-    print_to_conll(merge_tuples(parsed_tuples, sentence_tuples), sentences=lines)
+    print_to_conll(parsed_tuples, sentences=lines)
 
 if __name__ == '__main__':
     main()
