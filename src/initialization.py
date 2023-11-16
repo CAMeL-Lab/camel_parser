@@ -5,7 +5,7 @@ from pathlib import Path
 from huggingface_hub import hf_hub_download
 
 
-def setup_parsing_model(parse_model, model_path: Path):
+def set_up_parsing_model(parse_model, model_path: Path):
     # check if models folder exists
     if not os.path.exists(model_path):
         os.mkdir(model_path)

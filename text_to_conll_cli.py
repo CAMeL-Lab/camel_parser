@@ -44,7 +44,7 @@ from camel_tools.utils.charmap import CharMapper
 from camel_tools.morphology.database import MorphologyDB
 from camel_tools.morphology.analyzer import Analyzer
 from src.disambiguation.disambiguator_interface import get_disambiguator
-from src.initialization import setup_parsing_model
+from src.initialization import set_up_parsing_model
 from src.parse_disambiguation.disambiguation_analysis import to_sentence_analysis_list
 from src.parse_disambiguation.feature_extraction import to_conll_fields_list
 from src.text_cleaner import clean_lines, split_lines_words
@@ -165,7 +165,7 @@ def main():
     #
     ### Set up parsing model
     #
-    model_name = setup_parsing_model(parse_model, model_path=model_path)
+    model_name = set_up_parsing_model(parse_model, model_path=model_path)
 
     st = time.time()
     
