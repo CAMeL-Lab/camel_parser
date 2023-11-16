@@ -43,7 +43,7 @@ from camel_tools.disambig.common import DisambiguatedWord
 from camel_tools.utils.charmap import CharMapper
 from camel_tools.morphology.database import MorphologyDB
 from camel_tools.morphology.analyzer import Analyzer
-from src.disambiguation.disambiguator_interface import get_disambiguator
+from src.initialize_disambiguation.disambiguator_interface import get_disambiguator
 from src.initialization import set_up_parsing_model
 from src.parse_disambiguation.disambiguation_analysis import to_sentence_analysis_list
 from src.parse_disambiguation.feature_extraction import to_conll_fields_list
