@@ -46,7 +46,7 @@ from camel_tools.morphology.analyzer import Analyzer
 from src.disambiguation.disambiguator_interface import get_disambiguator
 from src.initialization import setup_parsing_model
 from src.parse_disambiguation.disambiguation_analysis import to_sentence_analysis_list
-from src.parse_disambiguation.feature_extraction import to_sentence_features_list
+from src.parse_disambiguation.feature_extraction import to_conll_fields_list
 from src.text_cleaner import clean_lines, split_lines_words
 from src.biaff_parser import parse_text_tuples, parse_conll
 from docopt import docopt
@@ -207,7 +207,7 @@ def main():
             token_lines = clean_lines(lines, arclean) if file_type == 'raw' else split_lines_words(lines)
             disambiguated_sentences: List[List[DisambiguatedWord]] = disambiguator.disambiguate_sentences(token_lines)
             sentence_analysis_list: List[List[dict]] = to_sentence_analysis_list(disambiguated_sentences)
-            text_tuples = to_sentence_features_list(sentence_analysis_list, clitic_feats_df, tagset)
+            text_tuples = to_conll_fields_list(sentence_analysis_list, clitic_feats_df, tagset)
         elif file_type == 'parse_tok':
             text_tuples = [[(0, tok, '_' ,'UNK') for tok in line.strip().split(' ')] for line in lines]
         elif file_type == 'tok_tagged':

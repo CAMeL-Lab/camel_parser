@@ -192,7 +192,7 @@ def build_token_list(sentence_features):
         , 1)
     ]
 
-def to_sentence_features_list(sentence_analysis_list: List[List[dict]], clitic_feats, tagset):
+def to_conll_fields_list(sentence_analysis_list: List[List[dict]], clitic_feats, tagset):
     sentence_features_list = []
     
     for sentence_analysis in sentence_analysis_list:
