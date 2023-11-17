@@ -2,8 +2,8 @@ from typing import Union
 from camel_tools.morphology.analyzer import Analyzer
 from camel_tools.disambig.bert import BERTUnfactoredDisambiguator
 
-from src.initialize_disambiguatior.bert_disambiguator import create_bert_disambiguator
-from src.initialize_disambiguatior.mle_disambiguator import MLEDisambiguatorAdapter
+from src.initialize_disambiguator.bert_disambiguator import create_bert_disambiguator
+from src.initialize_disambiguator.mle_disambiguator import MLEDisambiguatorAdapter
 
 
 def get_disambiguator(model_name: str, analyzer: Analyzer) -> Union[MLEDisambiguatorAdapter, BERTUnfactoredDisambiguator]:
