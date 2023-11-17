@@ -49,7 +49,6 @@ from src.utils.model_downloader import set_up_parsing_model
 from docopt import docopt
 from transformers.utils import logging
 from datetime import datetime
-import re
 import time
 from pandas import read_csv
 
@@ -115,6 +114,8 @@ def main():
     elif file_path is not None:
         with open(file_path, 'r') as f:
             lines = [line for line in f.readlines() if line.strip()]
+
+    # import pdb; pdb.set_trace()
 
     file_type_params = get_file_type_params(lines, file_type, file_path, model_path/model_name,
         arclean, disambiguator, clitic_feats_df, tagset)

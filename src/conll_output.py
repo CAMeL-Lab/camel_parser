@@ -1,5 +1,8 @@
 
 
+import re
+
+
 def print_to_conll(sentence_tuples, annotations=None, sentences=None):
     if sentences is not None: 
         sentences = list(filter(lambda x : len(re.sub(r"\s+", "", x, flags=re.UNICODE)) > 0, sentences))
