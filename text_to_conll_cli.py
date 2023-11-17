@@ -42,8 +42,8 @@ from typing import List
 from camel_tools.utils.charmap import CharMapper
 from camel_tools.morphology.database import MorphologyDB
 from camel_tools.morphology.analyzer import Analyzer
-from conll_output import print_to_conll
-from data_preparation import get_file_type_params, parse_text
+from src.conll_output import print_to_conll
+from src.data_preparation import get_file_type_params, parse_text
 from src.initialize_disambiguator.disambiguator_interface import get_disambiguator
 from src.utils.model_downloader import set_up_parsing_model
 from docopt import docopt
