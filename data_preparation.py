@@ -130,19 +130,47 @@ def get_tree_tokens(tok_pos_tuples):
         sentences.append(sentence)
     return sentences
 
-    # pass the path to the text file and the model path and name, and get the tuples
-    parsed_text_tuples = parse_conll(file_path, parse_model=parse_model_path)
 
-def handle_raw_or_tokenized(lines, arclean, file_type, disambiguator, clitic_feats_df, tagset):
-    # clean lines for raw only
-    token_lines = clean_lines(lines, arclean) if file_type == 'raw' else split_lines_words(lines)
+def handle_conll(file_type_params):
+    file_path, parse_model_path = file_type_params
+    # pass the path to the text file and the model path and name, and get the tuples
+    return parse_conll(file_path, parse_model=parse_model_path)
+
+def handle_tokenized(file_type_params):
+    lines, _, _, disambiguator, clitic_feats_df, tagset = file_type_params
+
+    token_lines = split_lines_words(lines)
     # run the disambiguator on the sentence list to get an analysis for all sentences
     disambiguated_sentences: List[List[DisambiguatedWord]] = disambiguator.disambiguate_sentences(token_lines)
     # get a single analysis for each word (top or match, match not implemented yet)
     sentence_analysis_list: List[List[dict]] = to_sentence_analysis_list(disambiguated_sentences)
     # extract the relevant items from each analysis into conll fields
-    text_tuples = to_conll_fields_list(sentence_analysis_list, clitic_feats_df, tagset)
+    return to_conll_fields_list(sentence_analysis_list, clitic_feats_df, tagset)
 
+def handle_raw(file_type_params):
+    lines, _, _, arclean, disambiguator, clitic_feats_df, tagset = file_type_params
+    # clean lines
+    token_lines = clean_lines(lines, arclean)
+    # run the disambiguator on the sentence list to get an analysis for all sentences
+    disambiguated_sentences: List[List[DisambiguatedWord]] = disambiguator.disambiguate_sentences(token_lines)
+    # get a single analysis for each word (top or match, match not implemented yet)
+    sentence_analysis_list: List[List[dict]] = to_sentence_analysis_list(disambiguated_sentences)
+    # extract the relevant items from each analysis into conll fields
+    return to_conll_fields_list(sentence_analysis_list, clitic_feats_df, tagset)
+
+def handle_parse_tok(file_type_params):
+    lines = file_type_params.lines
+    # construct tuples before sending them to the parser
+    return [[(0, tok, '_' ,'UNK', '_', '_', '_', '_', '_', '_') for tok in line.strip().split(' ')] for line in lines]
+
+def handle_tok_tagged(file_type_params):
+    lines = file_type_params.lines
+    # convert input tuple list into a tuple data structure
+    tok_pos_tuples_list = [string_to_tuple_list(line) for line in lines]
+    # since we did not start with sentences, we make sentences using the tokens (which we call tree tokens)
+    lines = get_tree_tokens(tok_pos_tuples_list)
+    # construct tuples before sending them to the parser
+    return [[(0, tup[0],'_' ,tup[1], '_', '_', '_', '_', '_', '_') for tup in tok_pos_tuples] for tok_pos_tuples in tok_pos_tuples_list]
 
 def get_file_type_params(lines, file_type, file_path, parse_model_path,
     arclean, disambiguator, clitic_feats_df, tagset):
@@ -157,29 +185,27 @@ def get_file_type_params(lines, file_type, file_path, parse_model_path,
     elif file_type == 'tok_tagged':
         return TokTaggedParams(lines, file_type, parse_model_path)
 
+def parse_text(file_type: str, file_type_params: FileTypeParams):
     if file_type == 'conll':
-        handle_conll(file_path, parse_model_path)
+        # handle_conll(file_path, parse_model_path)
+        parsed_text_tuples = handle_conll(file_type_params)
     else:
         text_tuples: List[List[tuple]] = []
-        if file_type in ['raw', 'tokenized']:
-            handle_raw_or_tokenized(lines, arclean, file_type, disambiguator, clitic_feats_df, tagset)
+        if file_type == 'raw':
+            text_tuples = handle_raw(file_type_params)
+        elif file_type == 'tokenized':
+            text_tuples = handle_tokenized(file_type_params)
         elif file_type == 'parse_tok':
-            # construct tuples before sending them to the parser
-            text_tuples = [[(0, tok, '_' ,'UNK', '_', '_', '_', '_', '_', '_') for tok in line.strip().split(' ')] for line in lines]
+            text_tuples = handle_parse_tok(file_type_params)
         elif file_type == 'tok_tagged':
-            # convert input tuple list into a tuple data structure
-            tok_pos_tuples_list = [string_to_tuple_list(line) for line in lines]
-            # since we did not start with sentences, we make sentences using the tokens (which we call tree tokens)
-            lines = get_tree_tokens(tok_pos_tuples_list)
-            # construct tuples before sending them to the parser
-            text_tuples = [[(0, tup[0],'_' ,tup[1], '_', '_', '_', '_', '_', '_') for tup in tok_pos_tuples] for tok_pos_tuples in tok_pos_tuples_list]
+            text_tuples = handle_tok_tagged(file_type_params)
 
         # the text tuples created from the above processes is passed to the dependency parser
-        parsed_text_tuples = parse_text_tuples(text_tuples, parse_model=parse_model_path)
+        parsed_text_tuples = parse_text_tuples(text_tuples, parse_model=file_type_params.parse_model_path)
         # for raw/tokenized, we want to extract the features to place in parsed_text_tuples
         # TODO: check if this step can be skipped by placing features in a step above
         text_feats: List[List[str]] = get_feats_from_text_tuples(text_tuples)
         # place features in FEATS column
         parsed_text_tuples = add_feats(parsed_text_tuples, text_feats)
-    
+
     return parsed_text_tuples
