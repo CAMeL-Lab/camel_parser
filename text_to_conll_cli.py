@@ -44,11 +44,11 @@ from camel_tools.utils.charmap import CharMapper
 from camel_tools.morphology.database import MorphologyDB
 from camel_tools.morphology.analyzer import Analyzer
 from src.initialize_disambiguation.disambiguator_interface import get_disambiguator
-from src.initialization import set_up_parsing_model
+from src.utils.model_downloader import set_up_parsing_model
 from src.parse_disambiguation.disambiguation_analysis import to_sentence_analysis_list
 from src.parse_disambiguation.feature_extraction import to_conll_fields_list
-from src.text_cleaner import clean_lines, split_lines_words
-from src.biaff_parser import parse_text_tuples, parse_conll
+from src.utils.text_cleaner import clean_lines, split_lines_words
+from src.dependency_parser.biaff_parser import parse_text_tuples, parse_conll
 from docopt import docopt
 from transformers.utils import logging
 from datetime import datetime
@@ -82,7 +82,10 @@ def get_feats_from_text_tuples(text_tuples: List[List[tuple]]) -> List[List[str]
     Returns:
         List[List[str]]: the FEATS column (or _ if it does not exist)
     """
-    return [[col_items[5] for col_items in tup_list] for tup_list in text_tuples]
+    try:
+        return [[col_items[5] for col_items in tup_list] for tup_list in text_tuples]
+    except:
+        import pdb; pdb.set_trace()
 
 def add_feats(text_tuples: List[List[tuple]], text_feats: List[List[str]]) -> List[List[tuple]]:
     """Add FEATS data to the text tuples.
@@ -198,10 +201,10 @@ def main():
         with open(file_path, 'r') as f:
             lines = [line for line in f.readlines() if line.strip()]
 
-    text_tuples: List[List[tuple]] = []
     if file_type == 'conll':
-        parsed_tuples = parse_conll(file_path, parse_model=model_path/model_name)
+        parsed_text_tuples = parse_conll(file_path, parse_model=model_path/model_name)
     else:
+        text_tuples: List[List[tuple]] = []
         if file_type in ['raw', 'tokenized']:
             # clean lines for raw only
             token_lines = clean_lines(lines, arclean) if file_type == 'raw' else split_lines_words(lines)
@@ -209,18 +212,18 @@ def main():
             sentence_analysis_list: List[List[dict]] = to_sentence_analysis_list(disambiguated_sentences)
             text_tuples = to_conll_fields_list(sentence_analysis_list, clitic_feats_df, tagset)
         elif file_type == 'parse_tok':
-            text_tuples = [[(0, tok, '_' ,'UNK') for tok in line.strip().split(' ')] for line in lines]
+            text_tuples = [[(0, tok, '_' ,'UNK', '_', '_', '_', '_', '_', '_') for tok in line.strip().split(' ')] for line in lines]
         elif file_type == 'tok_tagged':
             tok_pos_tuples_list = [string_to_tuple_list(line) for line in lines]
             lines = token_tuples_to_sentences(tok_pos_tuples_list)
-            text_tuples = [[(0, tup[0],'_' ,tup[1]) for tup in tok_pos_tuples] for tok_pos_tuples in tok_pos_tuples_list]
+            text_tuples = [[(0, tup[0],'_' ,tup[1], '_', '_', '_', '_', '_', '_') for tup in tok_pos_tuples] for tok_pos_tuples in tok_pos_tuples_list]
 
         parsed_text_tuples = parse_text_tuples(text_tuples, parse_model=model_path/model_name)
         
         text_feats: List[List[str]] = get_feats_from_text_tuples(text_tuples)
         parsed_text_tuples = add_feats(parsed_text_tuples, text_feats)
 
-    print_to_conll(parsed_tuples, sentences=lines)
+    print_to_conll(parsed_text_tuples, sentences=lines)
 
 if __name__ == '__main__':
     main()
