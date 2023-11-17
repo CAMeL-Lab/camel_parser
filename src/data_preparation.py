@@ -15,14 +15,15 @@ from src.utils.text_cleaner import clean_lines, split_lines_words
 
 @dataclass
 class ConllParams:
-    file_type: str
     file_path: str
     parse_model_path: str
+    
+    def __iter__(self):
+        return iter(astuple(self))
 
 @dataclass
 class RawParams:
     lines: List[str]
-    file_type: str
     parse_model_path: str
     arclean: CharMapper
     disambiguator: Union[BERTUnfactoredDisambiguator, MLEDisambiguator]
@@ -35,7 +36,6 @@ class RawParams:
 @dataclass
 class TokenizedParams:
     lines: List[str]
-    file_type: str
     parse_model_path: str
     disambiguator: Union[BERTUnfactoredDisambiguator, MLEDisambiguator]
     clitic_feats_df: pd.DataFrame
@@ -47,13 +47,11 @@ class TokenizedParams:
 @dataclass
 class ParseTokParams:
     lines: List[str]
-    file_type: str
     parse_model_path: str
 
 @dataclass
 class TokTaggedParams:
     lines: List[str]
-    file_type: str
     parse_model_path: str
 
 FileTypeParams = Union[ConllParams, RawParams, TokenizedParams, ParseTokParams, TokTaggedParams]
@@ -137,7 +135,7 @@ def handle_conll(file_type_params):
     return parse_conll(file_path, parse_model=parse_model_path)
 
 def handle_tokenized(file_type_params):
-    lines, _, _, disambiguator, clitic_feats_df, tagset = file_type_params
+    lines, _, disambiguator, clitic_feats_df, tagset = file_type_params
 
     token_lines = split_lines_words(lines)
     # run the disambiguator on the sentence list to get an analysis for all sentences
@@ -148,7 +146,7 @@ def handle_tokenized(file_type_params):
     return to_conll_fields_list(sentence_analysis_list, clitic_feats_df, tagset)
 
 def handle_raw(file_type_params):
-    lines, _, _, arclean, disambiguator, clitic_feats_df, tagset = file_type_params
+    lines, _, arclean, disambiguator, clitic_feats_df, tagset = file_type_params
     # clean lines
     token_lines = clean_lines(lines, arclean)
     # run the disambiguator on the sentence list to get an analysis for all sentences
@@ -175,15 +173,15 @@ def handle_tok_tagged(file_type_params):
 def get_file_type_params(lines, file_type, file_path, parse_model_path,
     arclean, disambiguator, clitic_feats_df, tagset):
     if file_type == 'conll':
-        return ConllParams(file_type, file_path, parse_model_path)
+        return ConllParams(file_path, parse_model_path)
     elif file_type == 'raw':
-        return RawParams(lines, file_type, parse_model_path, arclean, disambiguator, clitic_feats_df, tagset)
+        return RawParams(lines, parse_model_path, arclean, disambiguator, clitic_feats_df, tagset)
     elif file_type == 'tokenized':
-        return TokenizedParams(lines, file_type, parse_model_path, disambiguator, clitic_feats_df, tagset)
+        return TokenizedParams(lines, parse_model_path, disambiguator, clitic_feats_df, tagset)
     elif file_type == 'parse_tok':
-        return ParseTokParams(lines, file_type, parse_model_path)
+        return ParseTokParams(lines, parse_model_path)
     elif file_type == 'tok_tagged':
-        return TokTaggedParams(lines, file_type, parse_model_path)
+        return TokTaggedParams(lines, parse_model_path)
 
 def parse_text(file_type: str, file_type_params: FileTypeParams):
     if file_type == 'conll':
