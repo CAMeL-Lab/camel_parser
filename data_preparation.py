@@ -1,11 +1,63 @@
 
-from dataclasses import dataclass
+from dataclasses import astuple, dataclass
+import re
 from typing import List, Union
+import pandas as pd
+from camel_tools.utils.charmap import CharMapper
 from camel_tools.disambig.common import DisambiguatedWord
+from camel_tools.disambig.bert import BERTUnfactoredDisambiguator
+from camel_tools.disambig.mle import MLEDisambiguator
 from src.dependency_parser.biaff_parser import parse_conll, parse_text_tuples
 from src.parse_disambiguation.disambiguation_analysis import to_sentence_analysis_list
 from src.parse_disambiguation.feature_extraction import to_conll_fields_list
 from src.utils.text_cleaner import clean_lines, split_lines_words
+
+
+@dataclass
+class ConllParams:
+    file_type: str
+    file_path: str
+    parse_model_path: str
+
+@dataclass
+class RawParams:
+    lines: List[str]
+    file_type: str
+    parse_model_path: str
+    arclean: CharMapper
+    disambiguator: Union[BERTUnfactoredDisambiguator, MLEDisambiguator]
+    clitic_feats_df: pd.DataFrame
+    tagset: str
+    
+    def __iter__(self):
+        return iter(astuple(self))
+
+@dataclass
+class TokenizedParams:
+    lines: List[str]
+    file_type: str
+    parse_model_path: str
+    disambiguator: Union[BERTUnfactoredDisambiguator, MLEDisambiguator]
+    clitic_feats_df: pd.DataFrame
+    tagset: str
+    
+    def __iter__(self):
+        return iter(astuple(self))
+
+@dataclass
+class ParseTokParams:
+    lines: List[str]
+    file_type: str
+    parse_model_path: str
+
+@dataclass
+class TokTaggedParams:
+    lines: List[str]
+    file_type: str
+    parse_model_path: str
+
+FileTypeParams = Union[ConllParams, RawParams, TokenizedParams, ParseTokParams, TokTaggedParams]
+
 
 def get_feats_from_text_tuples(text_tuples: List[List[tuple]]) -> List[List[str]]:
     """Extract the FEATS columns from the unparsed data.
@@ -91,14 +143,20 @@ def handle_raw_or_tokenized(lines, arclean, file_type, disambiguator, clitic_fea
     # extract the relevant items from each analysis into conll fields
     text_tuples = to_conll_fields_list(sentence_analysis_list, clitic_feats_df, tagset)
 
-def parse_text(lines, # all
-               file_type, # all
-               file_path, # conll only, though can be changed
-               parse_model_path, # conll, 3
-               arclean, # raw, tokenized
-               disambiguator, # raw, tokenized
-               clitic_feats_df, # raw, tokenized
-               tagset): # raw, tokenized
+
+def get_file_type_params(lines, file_type, file_path, parse_model_path,
+    arclean, disambiguator, clitic_feats_df, tagset):
+    if file_type == 'conll':
+        return ConllParams(file_type, file_path, parse_model_path)
+    elif file_type == 'raw':
+        return RawParams(lines, file_type, parse_model_path, arclean, disambiguator, clitic_feats_df, tagset)
+    elif file_type == 'tokenized':
+        return TokenizedParams(lines, file_type, parse_model_path, disambiguator, clitic_feats_df, tagset)
+    elif file_type == 'parse_tok':
+        return ParseTokParams(lines, file_type, parse_model_path)
+    elif file_type == 'tok_tagged':
+        return TokTaggedParams(lines, file_type, parse_model_path)
+
     if file_type == 'conll':
         handle_conll(file_path, parse_model_path)
     else:
