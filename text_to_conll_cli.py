@@ -42,6 +42,7 @@ from typing import List
 from camel_tools.utils.charmap import CharMapper
 from camel_tools.morphology.database import MorphologyDB
 from camel_tools.morphology.analyzer import Analyzer
+from conll_output import print_to_conll
 from data_preparation import get_file_type_params, parse_text
 from src.initialize_disambiguator.disambiguator_interface import get_disambiguator
 from src.utils.model_downloader import set_up_parsing_model
@@ -55,18 +56,6 @@ from pandas import read_csv
 arguments = docopt(__doc__)
 
 logging.set_verbosity_error()
-
-def print_to_conll(sentence_tuples, annotations=None, sentences=None):
-    if sentences is not None: 
-        sentences = list(filter(lambda x : len(re.sub(r"\s+", "", x, flags=re.UNICODE)) > 0, sentences))
-    tokens = [[tup[1] for tup in sent] for sent in sentence_tuples]
-    for i in range(len(sentence_tuples)):
-        if sentences != None:
-            print(f"# text = {sentences[i].strip()}")
-            print(f"# treeTokens = {' '.join(tokens[i])}")
-        elif annotations != None:
-            [print(annotation) for annotation in annotations[i]]
-        print("\n".join(["\t".join([str(i) for i in tup]) for tup in sentence_tuples[i]])+"\n")
 
 def get_file_type(file_type):
     if file_type in ['conll', 'raw', 'tokenized', 'tok_tagged', 'parse_tok']:
