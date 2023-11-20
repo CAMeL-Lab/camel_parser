@@ -40,8 +40,6 @@ Options:
 from pathlib import Path
 from typing import List
 from camel_tools.utils.charmap import CharMapper
-from camel_tools.morphology.database import MorphologyDB
-from camel_tools.morphology.analyzer import Analyzer
 from src.conll_output import print_to_conll
 from src.data_preparation import get_file_type_params, parse_text
 from src.initialize_disambiguator.disambiguator_interface import get_disambiguator
@@ -87,16 +85,9 @@ def main():
     st = time.time()
     
     #
-    ### camel_tools imports ###
+    ### Set up disambiguator
     #
-    # used to clean text
-    arclean = CharMapper.builtin_mapper("arclean")
-    # used to initialize an Analyzer with ADD_PROP backoff 
-    # db = MorphologyDB.builtin_db('calima-msa-s31')
-    db_type = None if morphology_db == 'r13' else morphology_db
-    db = MorphologyDB.builtin_db(db_name=db_type)
-    analyzer = Analyzer(db=db, backoff='ADD_PROP', cache_size=100000)
-    disambiguator = get_disambiguator(disambiguator_type, analyzer)
+    disambiguator = get_disambiguator(disambiguator_type, morphology_db)
     
     
     #
