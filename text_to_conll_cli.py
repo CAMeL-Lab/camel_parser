@@ -67,6 +67,12 @@ def main():
     # camel_tools import used to clean text
     arclean = CharMapper.builtin_mapper("arclean")
 
+    #
+    ### Get clitic features
+    #
+    clitic_feats_df = read_csv(root_dir / 'data/clitic_feats.csv')
+    clitic_feats_df = clitic_feats_df.astype(str).astype(object) # so ints read are treated as string objects
+    
 
     #
     ### cli user input ###
@@ -92,14 +98,7 @@ def main():
     ### Set up disambiguator
     #
     disambiguator = get_disambiguator(disambiguator_type, morphology_db)
-    
-    
-    #
-    ### Get clitic features
-    #
-    clitic_feats_df = read_csv(root_dir / 'data/clitic_feats.csv')
-    clitic_feats_df = clitic_feats_df.astype(str).astype(object) # so ints read are treated as string objects
-    
+
     #
     ### main code ###
     #
