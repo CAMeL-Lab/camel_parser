@@ -45,7 +45,7 @@ from camel_tools.morphology.analyzer import Analyzer
 from src.conll_output import print_to_conll
 from src.data_preparation import get_file_type_params, parse_text
 from src.initialize_disambiguator.disambiguator_interface import get_disambiguator
-from src.utils.model_downloader import set_up_parsing_model
+from src.utils.model_downloader import get_model_name
 from docopt import docopt
 from transformers.utils import logging
 from datetime import datetime
@@ -82,7 +82,7 @@ def main():
     #
     ### Set up parsing model
     #
-    model_name = set_up_parsing_model(parse_model, model_path=model_path)
+    model_name = get_model_name(parse_model, model_path=model_path)
 
     st = time.time()
     

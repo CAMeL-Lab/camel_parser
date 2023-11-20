@@ -4,8 +4,7 @@ import os
 from pathlib import Path
 from huggingface_hub import hf_hub_download
 
-
-def set_up_parsing_model(parse_model, model_path: Path):
+def download_default_models(model_path: Path) -> None:
     # check if models folder exists
     if not os.path.exists(model_path):
         os.mkdir(model_path)
@@ -17,7 +16,11 @@ def set_up_parsing_model(parse_model, model_path: Path):
     if not os.path.exists(model_path / "CAMeLBERT-UD-biaffine.model"):
         # print('downloading ud model')
         hf_hub_download(repo_id="CAMeL-Lab/camelbert-ud-parser", filename="CAMeLBERT-UD-biaffine.model", local_dir=model_path)
+    
 
+def get_model_name(parse_model: str, model_path: Path) -> str:
+    download_default_models(model_path)
+    
     if parse_model == "catib":
         # print('using catib model')
         return "CAMeLBERT-CATiB-biaffine.model"
