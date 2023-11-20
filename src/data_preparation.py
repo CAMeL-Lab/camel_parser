@@ -1,58 +1,14 @@
 
-from dataclasses import astuple, dataclass
 import re
 from typing import List, Union
 import pandas as pd
-from camel_tools.utils.charmap import CharMapper
 from camel_tools.disambig.common import DisambiguatedWord
-from camel_tools.disambig.bert import BERTUnfactoredDisambiguator
-from camel_tools.disambig.mle import MLEDisambiguator
+from src.classes import ConllParams, RawParams, TokenizedParams, ParseTokParams, TokTaggedParams
 from src.dependency_parser.biaff_parser import parse_conll, parse_text_tuples
 from src.parse_disambiguation.disambiguation_analysis import to_sentence_analysis_list
 from src.parse_disambiguation.feature_extraction import to_conll_fields_list
 from src.utils.text_cleaner import clean_lines, split_lines_words
 
-
-@dataclass
-class ConllParams:
-    file_path: str
-    parse_model_path: str
-    
-    def __iter__(self):
-        return iter(astuple(self))
-
-@dataclass
-class RawParams:
-    lines: List[str]
-    parse_model_path: str
-    arclean: CharMapper
-    disambiguator: Union[BERTUnfactoredDisambiguator, MLEDisambiguator]
-    clitic_feats_df: pd.DataFrame
-    tagset: str
-    
-    def __iter__(self):
-        return iter(astuple(self))
-
-@dataclass
-class TokenizedParams:
-    lines: List[str]
-    parse_model_path: str
-    disambiguator: Union[BERTUnfactoredDisambiguator, MLEDisambiguator]
-    clitic_feats_df: pd.DataFrame
-    tagset: str
-    
-    def __iter__(self):
-        return iter(astuple(self))
-
-@dataclass
-class ParseTokParams:
-    lines: List[str]
-    parse_model_path: str
-
-@dataclass
-class TokTaggedParams:
-    lines: List[str]
-    parse_model_path: str
 
 FileTypeParams = Union[ConllParams, RawParams, TokenizedParams, ParseTokParams, TokTaggedParams]
 
