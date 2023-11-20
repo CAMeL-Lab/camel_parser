@@ -102,7 +102,7 @@ def main():
     #
     ### Get clitic features
     #
-    clitic_feats_df = read_csv('data/clitic_feats.csv')
+    clitic_feats_df = read_csv(root_dir / 'data/clitic_feats.csv')
     clitic_feats_df = clitic_feats_df.astype(str).astype(object) # so ints read are treated as string objects
     
     #
