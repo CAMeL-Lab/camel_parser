@@ -64,6 +64,10 @@ def main():
     root_dir = Path(__file__).parent
     model_path = root_dir/"models"
     
+    # camel_tools import used to clean text
+    arclean = CharMapper.builtin_mapper("arclean")
+
+
     #
     ### cli user input ###
     #
@@ -78,11 +82,11 @@ def main():
 
 
     #
-    ### Set up parsing model
+    ### Set up parsing model 
+    # (download defaults models, and get correct model name from the models directory)
     #
     model_name = get_model_name(parse_model, model_path=model_path)
-
-    st = time.time()
+    
     
     #
     ### Set up disambiguator
