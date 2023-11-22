@@ -5,6 +5,7 @@ import pandas as pd
 from camel_tools.disambig.common import DisambiguatedWord
 from src.classes import ConllParams, RawParams, TokenizedParams, ParseTokParams, TokTaggedParams
 from src.dependency_parser.biaff_parser import parse_conll, parse_text_tuples
+from src.initialize_disambiguator.disambiguator_interface import get_disambiguator
 from src.parse_disambiguation.disambiguation_analysis import to_sentence_analysis_list
 from src.parse_disambiguation.feature_extraction import to_conll_fields_list
 from src.utils.text_cleaner import clean_lines, split_lines_words
@@ -91,9 +92,11 @@ def handle_conll(file_type_params):
     return parse_conll(file_path, parse_model=parse_model_path)
 
 def handle_tokenized(file_type_params):
-    lines, _, disambiguator, clitic_feats_df, tagset = file_type_params
+    lines, _, disambiguator_type, clitic_feats_df, tagset, morphology_db_type = file_type_params
 
     token_lines = split_lines_words(lines)
+
+    disambiguator = get_disambiguator(disambiguator_type, morphology_db_type)
     # run the disambiguator on the sentence list to get an analysis for all sentences
     disambiguated_sentences: List[List[DisambiguatedWord]] = disambiguator.disambiguate_sentences(token_lines)
     # get a single analysis for each word (top or match, match not implemented yet)
@@ -102,9 +105,11 @@ def handle_tokenized(file_type_params):
     return to_conll_fields_list(sentence_analysis_list, clitic_feats_df, tagset)
 
 def handle_raw(file_type_params):
-    lines, _, arclean, disambiguator, clitic_feats_df, tagset = file_type_params
+    lines, _, arclean, disambiguator_type, clitic_feats_df, tagset, morphology_db_type = file_type_params
     # clean lines
     token_lines = clean_lines(lines, arclean)
+
+    disambiguator = get_disambiguator(disambiguator_type, morphology_db_type)
     # run the disambiguator on the sentence list to get an analysis for all sentences
     disambiguated_sentences: List[List[DisambiguatedWord]] = disambiguator.disambiguate_sentences(token_lines)
     # get a single analysis for each word (top or match, match not implemented yet)
@@ -127,13 +132,13 @@ def handle_tok_tagged(file_type_params):
     return [[(0, tup[0],'_' ,tup[1], '_', '_', '_', '_', '_', '_') for tup in tok_pos_tuples] for tok_pos_tuples in tok_pos_tuples_list]
 
 def get_file_type_params(lines, file_type, file_path, parse_model_path,
-    arclean, disambiguator, clitic_feats_df, tagset):
+    arclean, disambiguator_type, clitic_feats_df, tagset, morphology_db_type):
     if file_type == 'conll':
         return ConllParams(file_path, parse_model_path)
     elif file_type == 'raw':
-        return RawParams(lines, parse_model_path, arclean, disambiguator, clitic_feats_df, tagset)
+        return RawParams(lines, parse_model_path, arclean, disambiguator_type, clitic_feats_df, tagset, morphology_db_type)
     elif file_type == 'tokenized':
-        return TokenizedParams(lines, parse_model_path, disambiguator, clitic_feats_df, tagset)
+        return TokenizedParams(lines, parse_model_path, disambiguator_type, clitic_feats_df, tagset, morphology_db_type)
     elif file_type == 'parse_tok':
         return ParseTokParams(lines, parse_model_path)
     elif file_type == 'tok_tagged':

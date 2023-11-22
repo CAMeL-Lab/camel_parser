@@ -23,6 +23,7 @@ class RawParams:
     disambiguator: Union[BERTUnfactoredDisambiguator, MLEDisambiguator]
     clitic_feats_df: pd.DataFrame
     tagset: str
+    morphology_db_type: str
     
     def __iter__(self):
         return iter(astuple(self))
@@ -34,6 +35,7 @@ class TokenizedParams:
     disambiguator: Union[BERTUnfactoredDisambiguator, MLEDisambiguator]
     clitic_feats_df: pd.DataFrame
     tagset: str
+    morphology_db_type: str
     
     def __iter__(self):
         return iter(astuple(self))

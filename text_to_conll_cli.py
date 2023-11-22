@@ -4,7 +4,7 @@ Disambiguator and Conll builder CLI.
 Usage:
     text_to_conll_cli (-i <input> | --input=<input> | -s <string> | --string=<string>)
         (-f <file_type> | --file_type=<file_type>)
-        [-b <morphology_db> | --morphology_db=<morphology_db>]
+        [-b <morphology_db_type> | --morphology_db_type=<morphology_db_type>]
         [-d <disambiguator> | --disambiguator=<disambiguator>]
         [-m <model> | --model=<model>]
         [-t  <tagset>| --tagset=<tagset>]
@@ -23,7 +23,7 @@ Options:
             tokenized: whitespace tokenized text (text will not be cleaned)
             tok_tagged: text is already tokenized and POS tagged, in tuple form
             parse_tok: text is already tokenized, only parse tokenized input; don't disambiguate to add POS tags or features
-    -b <morphology_db> --morphology_db=<morphology_db>
+    -b <morphology_db_type> --morphology_db_type=<morphology_db_type>
         The morphology database to use; will use camel_tools built-in by default [default: r13]
     -d <disambiguator> --disambiguator=<disambiguator>
         The disambiguation technique used to tokenize the text lines, either 'mle' or 'bert' [default: bert]
@@ -42,7 +42,6 @@ from typing import List
 from camel_tools.utils.charmap import CharMapper
 from src.conll_output import print_to_conll
 from src.data_preparation import get_file_type_params, parse_text
-from src.initialize_disambiguator.disambiguator_interface import get_disambiguator
 from src.utils.model_downloader import get_model_name
 from docopt import docopt
 from transformers.utils import logging
@@ -80,7 +79,7 @@ def main():
     file_path = arguments['--input']
     string_text = arguments['--string']
     file_type = get_file_type(arguments['--file_type'])
-    morphology_db = arguments['--morphology_db']
+    morphology_db_type = arguments['--morphology_db_type']
     disambiguator_type = arguments['--disambiguator']
     parse_model = arguments['--model']
     # log = arguments['--log']
@@ -93,12 +92,6 @@ def main():
     #
     model_name = get_model_name(parse_model, model_path=model_path)
     
-    
-    #
-    ### Set up disambiguator
-    #
-    disambiguator = get_disambiguator(disambiguator_type, morphology_db)
-
     #
     ### main code ###
     #
@@ -112,7 +105,7 @@ def main():
     # import pdb; pdb.set_trace()
 
     file_type_params = get_file_type_params(lines, file_type, file_path, model_path/model_name,
-        arclean, disambiguator, clitic_feats_df, tagset)
+        arclean, disambiguator_type, clitic_feats_df, tagset, morphology_db_type)
     parsed_text_tuples = parse_text(file_type, file_type_params)
 
     print_to_conll(parsed_text_tuples, sentences=lines)
