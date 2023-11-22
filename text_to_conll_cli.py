@@ -19,10 +19,10 @@ Options:
     -f <file_type> --file_type=<file_type>
         The type of file passed. Could be 
             conll: conll
-            raw: raw text
-            tokenized: whitespace tokenized text (text will not be cleaned)
-            tok_tagged: text is already tokenized and POS tagged, in tuple form
-            parse_tok: text is already tokenized, only parse tokenized input; don't disambiguate to add POS tags or features
+            text: raw text
+            preprocessed_text: whitespace tokenized text (text will not be cleaned)
+            tokenized_tagged: text is already tokenized and POS tagged, in tuple form
+            tokenized: text is already tokenized, only parse tokenized input; don't disambiguate to add POS tags or features
     -b <morphology_db_type> --morphology_db_type=<morphology_db_type>
         The morphology database to use; will use camel_tools built-in by default [default: r13]
     -d <disambiguator> --disambiguator=<disambiguator>
@@ -54,7 +54,7 @@ arguments = docopt(__doc__)
 logging.set_verbosity_error()
 
 def get_file_type(file_type):
-    if file_type in ['conll', 'raw', 'tokenized', 'tok_tagged', 'parse_tok']:
+    if file_type in ['conll', 'text', 'preprocessed_text', 'tokenized_tagged', 'tokenized']:
         return file_type 
     assert False, 'Unknown file type'
 

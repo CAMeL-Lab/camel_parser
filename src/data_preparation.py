@@ -3,7 +3,7 @@ import re
 from typing import List, Union
 import pandas as pd
 from camel_tools.disambig.common import DisambiguatedWord
-from src.classes import ConllParams, RawParams, TokenizedParams, ParseTokParams, TokTaggedParams
+from src.classes import ConllParams, TextParams, PreprocessedTextParams, TokenizedParams, TokenizedTaggedParams
 from src.dependency_parser.biaff_parser import parse_conll, parse_text_tuples
 from src.initialize_disambiguator.disambiguator_interface import get_disambiguator
 from src.parse_disambiguation.disambiguation_analysis import to_sentence_analysis_list
@@ -11,7 +11,7 @@ from src.parse_disambiguation.feature_extraction import to_conll_fields_list
 from src.utils.text_cleaner import clean_lines, split_lines_words
 
 
-FileTypeParams = Union[ConllParams, RawParams, TokenizedParams, ParseTokParams, TokTaggedParams]
+FileTypeParams = Union[ConllParams, TextParams, PreprocessedTextParams, TokenizedParams, TokenizedTaggedParams]
 
 
 def get_feats_from_text_tuples(text_tuples: List[List[tuple]]) -> List[List[str]]:
@@ -91,7 +91,7 @@ def handle_conll(file_type_params):
     # pass the path to the text file and the model path and name, and get the tuples
     return parse_conll(file_path, parse_model=parse_model_path)
 
-def handle_tokenized(file_type_params):
+def handle_preprocessed_text(file_type_params):
     lines, _, disambiguator_type, clitic_feats_df, tagset, morphology_db_type = file_type_params
 
     token_lines = split_lines_words(lines)
@@ -104,7 +104,7 @@ def handle_tokenized(file_type_params):
     # extract the relevant items from each analysis into conll fields
     return to_conll_fields_list(sentence_analysis_list, clitic_feats_df, tagset)
 
-def handle_raw(file_type_params):
+def handle_text(file_type_params):
     lines, _, arclean, disambiguator_type, clitic_feats_df, tagset, morphology_db_type = file_type_params
     # clean lines
     token_lines = clean_lines(lines, arclean)
@@ -117,12 +117,12 @@ def handle_raw(file_type_params):
     # extract the relevant items from each analysis into conll fields
     return to_conll_fields_list(sentence_analysis_list, clitic_feats_df, tagset)
 
-def handle_parse_tok(file_type_params):
+def handle_tokenized(file_type_params):
     lines = file_type_params.lines
     # construct tuples before sending them to the parser
     return [[(0, tok, '_' ,'UNK', '_', '_', '_', '_', '_', '_') for tok in line.strip().split(' ')] for line in lines]
 
-def handle_tok_tagged(file_type_params):
+def handle_tokenized_tagged(file_type_params):
     lines = file_type_params.lines
     # convert input tuple list into a tuple data structure
     tok_pos_tuples_list = [string_to_tuple_list(line) for line in lines]
@@ -135,14 +135,14 @@ def get_file_type_params(lines, file_type, file_path, parse_model_path,
     arclean, disambiguator_type, clitic_feats_df, tagset, morphology_db_type):
     if file_type == 'conll':
         return ConllParams(file_path, parse_model_path)
-    elif file_type == 'raw':
-        return RawParams(lines, parse_model_path, arclean, disambiguator_type, clitic_feats_df, tagset, morphology_db_type)
+    elif file_type == 'text':
+        return TextParams(lines, parse_model_path, arclean, disambiguator_type, clitic_feats_df, tagset, morphology_db_type)
+    elif file_type == 'preprocessed_text':
+        return PreprocessedTextParams(lines, parse_model_path, disambiguator_type, clitic_feats_df, tagset, morphology_db_type)
     elif file_type == 'tokenized':
-        return TokenizedParams(lines, parse_model_path, disambiguator_type, clitic_feats_df, tagset, morphology_db_type)
-    elif file_type == 'parse_tok':
-        return ParseTokParams(lines, parse_model_path)
-    elif file_type == 'tok_tagged':
-        return TokTaggedParams(lines, parse_model_path)
+        return TokenizedParams(lines, parse_model_path)
+    elif file_type == 'tokenized_tagged':
+        return TokenizedTaggedParams(lines, parse_model_path)
 
 def parse_text(file_type: str, file_type_params: FileTypeParams):
     if file_type == 'conll':
@@ -150,18 +150,18 @@ def parse_text(file_type: str, file_type_params: FileTypeParams):
         parsed_text_tuples = handle_conll(file_type_params)
     else:
         text_tuples: List[List[tuple]] = []
-        if file_type == 'raw':
-            text_tuples = handle_raw(file_type_params)
+        if file_type == 'text':
+            text_tuples = handle_text(file_type_params)
+        elif file_type == 'preprocessed_text':
+            text_tuples = handle_preprocessed_text(file_type_params)
         elif file_type == 'tokenized':
             text_tuples = handle_tokenized(file_type_params)
-        elif file_type == 'parse_tok':
-            text_tuples = handle_parse_tok(file_type_params)
-        elif file_type == 'tok_tagged':
-            text_tuples = handle_tok_tagged(file_type_params)
+        elif file_type == 'tokenized_tagged':
+            text_tuples = handle_tokenized_tagged(file_type_params)
 
         # the text tuples created from the above processes is passed to the dependency parser
         parsed_text_tuples = parse_text_tuples(text_tuples, parse_model=file_type_params.parse_model_path)
-        # for raw/tokenized, we want to extract the features to place in parsed_text_tuples
+        # for text/preprocessed_text, we want to extract the features to place in parsed_text_tuples
         # TODO: check if this step can be skipped by placing features in a step above
         text_feats: List[List[str]] = get_feats_from_text_tuples(text_tuples)
         # place features in FEATS column

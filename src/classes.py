@@ -16,7 +16,7 @@ class ConllParams:
         return iter(astuple(self))
 
 @dataclass
-class RawParams:
+class TextParams:
     lines: List[str]
     parse_model_path: str
     arclean: CharMapper
@@ -29,7 +29,7 @@ class RawParams:
         return iter(astuple(self))
 
 @dataclass
-class TokenizedParams:
+class PreprocessedTextParams:
     lines: List[str]
     parse_model_path: str
     disambiguator: Union[BERTUnfactoredDisambiguator, MLEDisambiguator]
@@ -41,12 +41,12 @@ class TokenizedParams:
         return iter(astuple(self))
 
 @dataclass
-class ParseTokParams:
+class TokenizedParams:
     lines: List[str]
     parse_model_path: str
 
 @dataclass
-class TokTaggedParams:
+class TokenizedTaggedParams:
     lines: List[str]
     parse_model_path: str
 
