@@ -9,6 +9,7 @@ from src.initialize_disambiguator.disambiguator_interface import get_disambiguat
 from src.parse_disambiguation.disambiguation_analysis import to_sentence_analysis_list
 from src.parse_disambiguation.feature_extraction import to_conll_fields_list
 from src.utils.text_cleaner import clean_lines, split_lines_words
+from src.logger import log
 
 
 FileTypeParams = Union[ConllParams, TextParams, PreprocessedTextParams, TokenizedParams, TokenizedTaggedParams]
@@ -84,7 +85,6 @@ def get_tree_tokens(tok_pos_tuples):
         sentence = ' '.join([tok_pos_tuple[0] for tok_pos_tuple in sentence_tuples])
         sentences.append(sentence)
     return sentences
-
 
 def handle_conll(file_type_params):
     file_path, parse_model_path = file_type_params

@@ -3,6 +3,7 @@ from camel_tools.morphology.database import MorphologyDB
 from camel_tools.morphology.analyzer import Analyzer
 from camel_tools.disambig.bert import BERTUnfactoredDisambiguator
 
+from src.logger import log
 from src.initialize_disambiguator.bert_disambiguator import create_bert_disambiguator
 from src.initialize_disambiguator.mle_disambiguator import MLEDisambiguatorAdapter
 
@@ -13,6 +14,7 @@ def set_up_analyzer(morphology_db: str) -> Analyzer:
     db = MorphologyDB.builtin_db(db_name=db_type)
     return Analyzer(db=db, backoff='ADD_PROP', cache_size=100000)
 
+@log
 def get_disambiguator(model_name: str, morphology_db: str) -> Union[MLEDisambiguatorAdapter, BERTUnfactoredDisambiguator]:
     analyzer = set_up_analyzer(morphology_db)
     

@@ -8,7 +8,6 @@ Usage:
         [-d <disambiguator> | --disambiguator=<disambiguator>]
         [-m <model> | --model=<model>]
         [-t  <tagset>| --tagset=<tagset>]
-        [-l | --log]
     text_to_conll_cli (-h | --help)
 
 Options:
@@ -31,8 +30,6 @@ Options:
         The name BERT model used to parse (to be placed in the model directory) [default: catib]
     -t <tagset> --tagset=<tagset>
         Selecting either catib6 or UD as the POS tagset [default: catib6]
-    -l --log
-        Log execution time for various stages
     -h --help
         Show this screen.
 """
@@ -82,7 +79,6 @@ def main():
     morphology_db_type = arguments['--morphology_db_type']
     disambiguator_type = arguments['--disambiguator']
     parse_model = arguments['--model']
-    # log = arguments['--log']
     tagset = arguments['--tagset']
 
 

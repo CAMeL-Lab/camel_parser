@@ -162,3 +162,5 @@ cython_debug/
 .DS_Store
 models/
 table_3_experiments/
+
+logs.txt
