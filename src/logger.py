@@ -20,6 +20,8 @@ def map_function_to_phrase(function_name):
         return "parsing duration"
     elif function_name == "get_disambiguator":
         return "disambiguator setup duration"
+    else:
+        return function_name
 
 def log(func):
     @functools.wraps(func)
