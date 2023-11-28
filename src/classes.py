@@ -20,7 +20,7 @@ class TextParams:
     lines: List[str]
     parse_model_path: str
     arclean: CharMapper
-    disambiguator: Union[BERTUnfactoredDisambiguator, MLEDisambiguator]
+    disambiguator_param: Union[BERTUnfactoredDisambiguator, MLEDisambiguator, str]
     clitic_feats_df: pd.DataFrame
     tagset: str
     morphology_db_type: str
@@ -32,7 +32,7 @@ class TextParams:
 class PreprocessedTextParams:
     lines: List[str]
     parse_model_path: str
-    disambiguator: Union[BERTUnfactoredDisambiguator, MLEDisambiguator]
+    disambiguator: Union[BERTUnfactoredDisambiguator, MLEDisambiguator, str]
     clitic_feats_df: pd.DataFrame
     tagset: str
     morphology_db_type: str
