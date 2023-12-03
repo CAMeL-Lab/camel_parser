@@ -98,7 +98,6 @@ def main():
         with open(file_path, 'r') as f:
             lines = [line for line in f.readlines() if line.strip()]
 
-    # import pdb; pdb.set_trace()
 
     file_type_params = get_file_type_params(lines, file_type, file_path, model_path/model_name,
         arclean, disambiguator_type, clitic_feats_df, tagset, morphology_db_type)

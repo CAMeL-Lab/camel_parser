@@ -146,7 +146,9 @@ def get_main_features_df(word_analysis):
     try:
         return pd.DataFrame({'token': tokens, 'catib6': catib6, 'ud': ud, 'lemma': lemmas})
     except:
-        import pdb; pdb.set_trace()
+        print('Discrepency in length of token, catib6, and/or ud list')
+        print(f'Lengths: token = {len(tokens)}, catib6 = {len(catib6)}, ud = {len(ud)}')
+        assert False
 
 def get_word_features_df(word_analysis, clitic_feats):
     """if a word is composed of multiple tokens, return them all.

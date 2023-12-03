@@ -27,8 +27,9 @@ def get_feats_from_text_tuples(text_tuples: List[List[tuple]]) -> List[List[str]
     """
     try:
         return [[col_items[5] for col_items in tup_list] for tup_list in text_tuples]
-    except:
-        import pdb; pdb.set_trace()
+    except Exception as e:
+        print(e)
+        print('Not enough elements in tuple.')
 
 
 def add_feats(text_tuples: List[List[tuple]], text_feats: List[List[str]]) -> List[List[tuple]]:
