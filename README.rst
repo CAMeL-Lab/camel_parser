@@ -53,15 +53,13 @@ The verbose version of the above example (default values are shown)
 
 .. code-block:: bash
 
-    python text_to_conll_cli.py -f text -b r13 -d bert -m catib -t 
-    catib6 -s "جامعة نيويورك أبو ظبي تنشر أول أطلس لكوكب المريخ باللغة العربية."
+    python text_to_conll_cli.py -f text -b r13 -d bert -m catib -t catib6 -s "جامعة نيويورك أبو ظبي تنشر أول أطلس لكوكب المريخ باللغة العربية."
 
 Passing preprocessed text (cleaned and whitespace tokenized)
 
 .. code-block:: bash
     
-    python text_to_conll_cli.py -f preprocessed_text 
-    -s "جامعة نيويورك أبو ظبي تنشر أول أطلس لكوكب المريخ باللغة العربية ."
+    python text_to_conll_cli.py -f preprocessed_text -s "جامعة نيويورك أبو ظبي تنشر أول أطلس لكوكب المريخ باللغة العربية ."
 
 *Note that the difference between the -f text and preprocessed_text parser input settings is*
 *that for text we use different utilities from CAMeL Tools to* 
@@ -77,16 +75,13 @@ the POS tags and features will not be generated.
 
 .. code-block:: bash
     
-    python text_to_conll_cli.py -f tokenized 
-    -s "جامعة نيويورك أبو ظبي تنشر أول أطلس ل+ كوكب المريخ ب+ اللغة العربية ."
+    python text_to_conll_cli.py -f tokenized -s "جامعة نيويورك أبو ظبي تنشر أول أطلس ل+ كوكب المريخ ب+ اللغة العربية ."
 
 tokenized_tagged is used when the user has the tokens and POS tags. They should be passed as tuples.
 
 .. code-block:: bash
     
-    python text_to_conll_cli.py -f tokenized_tagged 
-    -s "(جامعة, NOM) (نيويورك, PROP) (أبو, PROP) (ظبي, PROP) (تنشر, VRB) (أول, NOM) (أطلس, NOM) (ل+, PRT) 
-    (كوكب, NOM) (المريخ, PROP) (ب+, PRT) (اللغة, NOM) (العربية, NOM) (., PNX)"
+    python text_to_conll_cli.py -f tokenized_tagged -s "(جامعة, NOM) (نيويورك, PROP) (أبو, PROP) (ظبي, PROP) (تنشر, VRB) (أول, NOM) (أطلس, NOM) (ل+, PRT) (كوكب, NOM) (المريخ, PROP) (ب+, PRT) (اللغة, NOM) (العربية, NOM) (., PNX)"
 
 
 Extending the code
