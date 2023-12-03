@@ -8,11 +8,13 @@ CamelParser
 Introduction
 ------------
 
-CamelParser is an open-source Python-based Arabic dependency parser targeting two popular Arabic dependency formalisms, 
-the Columbia Arabic Treebank (CATiB), and Universal Dependencies (UD).
+CamelParser is an open-source Python-based Arabic dependency parser targeting two popular 
+Arabic dependency formalisms, the Columbia Arabic Treebank (CATiB), and Universal Dependencies (UD).
 
-The CamelParser pipeline handles the processing of raw text and roduces tokenization, part-of-speech and rich morphological features.
-For disambiguation, users can choose between the BERT unfactored disambiguator, or a lighter Maximum Likelihood Estimation (MLE) disambiguator, both of which are included in CAMeL Tools. For depednecy parsing, we use the SuPar Biaffine Dependency Parser.
+The CamelParser pipeline handles the processing of raw text and roduces tokenization, 
+part-of-speech and rich morphological features. For disambiguation, users can choose between 
+the BERT unfactored disambiguator, or a lighter Maximum Likelihood Estimation (MLE) disambiguator, 
+both of which are included in CAMeL Tools. For depednecy parsing, we use the SuPar Biaffine Dependency Parser.
 
 
 Installation
@@ -31,11 +33,15 @@ Installation
 
     python download_models.py
 
-Currently, two Arabic script models, CATiB and UD, will be downloaded from the CAMeL Lab's `parser models collection <https://huggingface.co/collections/CAMeL-Lab/camelparser-654a3df21f70b3b5e72f95d9>`_ on Hugging Face. More models will be added soon!
+Currently, two Arabic script models, CATiB and UD, will be downloaded from the CAMeL Lab's 
+`parser models collection <https://huggingface.co/collections/CAMeL-Lab/camelparser-654a3df21f70b3b5e72f95d9>`_ 
+on Hugging Face. More models will be added soon!
 
 Examples
 --------
-Below are examples using the different inputs that CamelParser accepts. We pass each example as a string using -s. However, when passing multiple sentences it is better to use -i along with the path to the file containing the sentences.
+Below are examples using the different inputs that CamelParser accepts. 
+We pass each example as a string using -s. However, when passing multiple sentences it is 
+better to use -i along with the path to the file containing the sentences.
 
 Passing text
 
@@ -47,27 +53,40 @@ The verbose version of the above example (default values are shown)
 
 .. code-block:: bash
 
-    python text_to_conll_cli.py -f text -b r13 -d bert -m catib -t catib6 -s "جامعة نيويورك أبو ظبي تنشر أول أطلس لكوكب المريخ باللغة العربية."
+    python text_to_conll_cli.py -f text -b r13 -d bert -m catib -t 
+    catib6 -s "جامعة نيويورك أبو ظبي تنشر أول أطلس لكوكب المريخ باللغة العربية."
 
 Passing preprocessed text (cleaned and whitespace tokenized)
 
 .. code-block:: bash
     
-    python text_to_conll_cli.py -f preprocessed_text -s "جامعة نيويورك أبو ظبي تنشر أول أطلس لكوكب المريخ باللغة العربية ."
+    python text_to_conll_cli.py -f preprocessed_text 
+    -s "جامعة نيويورك أبو ظبي تنشر أول أطلس لكوكب المريخ باللغة العربية ."
 
-*Note that the difference between the -f text and preprocessed_text parser input settings is that for text we use different utilities from CAMeL Tools to* `normalize unicode <https://camel-tools.readthedocs.io/en/latest/api/utils/normalize.html?highlight=normalize_unicode#camel_tools.utils.normalize.normalize_unicode>`_, `dediactritize <https://camel-tools.readthedocs.io/en/latest/api/utils/dediac.html?highlight=dediac_ar>`_, *clean the text using* `arclean <https://camel-tools.readthedocs.io/en/latest/api/utils/charmap.html?highlight=arclean#utility>`_, *and perform* `whitespace tokenization <https://camel-tools.readthedocs.io/en/latest/api/tokenizers/word.html?highlight=simple_word_tokenize#camel_tools.tokenizers.word.simple_word_tokenize>`_.
+*Note that the difference between the -f text and preprocessed_text parser input settings is*
+*that for text we use different utilities from CAMeL Tools to* 
+`normalize unicode <https://camel-tools.readthedocs.io/en/latest/api/utils/normalize.html?highlight=normalize_unicode#camel_tools.utils.normalize.normalize_unicode>`_, 
+`dediactritize <https://camel-tools.readthedocs.io/en/latest/api/utils/dediac.html?highlight=dediac_ar>`_, 
+*clean the text using* 
+`arclean <https://camel-tools.readthedocs.io/en/latest/api/utils/charmap.html?highlight=arclean#utility>`_, 
+*and perform* 
+`whitespace tokenization <https://camel-tools.readthedocs.io/en/latest/api/tokenizers/word.html?highlight=simple_word_tokenize#camel_tools.tokenizers.word.simple_word_tokenize>`_.
 
-tokenized is used when 1) the text has already been tokenized, and 2) only dependency relations are needed; the POS tags and features will not be generated.
+tokenized is used when 1) the text has already been tokenized, and 2) only dependency relations are needed; 
+the POS tags and features will not be generated.
 
 .. code-block:: bash
     
-    python text_to_conll_cli.py -f tokenized -s "جامعة نيويورك أبو ظبي تنشر أول أطلس ل+ كوكب المريخ ب+ اللغة العربية ."
+    python text_to_conll_cli.py -f tokenized 
+    -s "جامعة نيويورك أبو ظبي تنشر أول أطلس ل+ كوكب المريخ ب+ اللغة العربية ."
 
 tokenized_tagged is used when the user has the tokens and POS tags. They should be passed as tuples.
 
 .. code-block:: bash
     
-    python text_to_conll_cli.py -f tokenized_tagged -s "(جامعة, NOM) (نيويورك, PROP) (أبو, PROP) (ظبي, PROP) (تنشر, VRB) (أول, NOM) (أطلس, NOM) (ل+, PRT) (كوكب, NOM) (المريخ, PROP) (ب+, PRT) (اللغة, NOM) (العربية, NOM) (., PNX)"
+    python text_to_conll_cli.py -f tokenized_tagged 
+    -s "(جامعة, NOM) (نيويورك, PROP) (أبو, PROP) (ظبي, PROP) (تنشر, VRB) (أول, NOM) (أطلس, NOM) (ل+, PRT) 
+    (كوكب, NOM) (المريخ, PROP) (ب+, PRT) (اللغة, NOM) (العربية, NOM) (., PNX)"
 
 
 Extending the code
@@ -82,7 +101,8 @@ Using another morphology database
 
 Curently, the CamelParser uses CAMeLTools' default morphology database, the morphology-db-msa-r13.
 
-For our paper, we used the calima-msa-s31 database. To use this database, follow these steps (note that you need an account with the LDC):
+For our paper, we used the calima-msa-s31 database. To use this database, 
+follow these steps (note that you need an account with the LDC):
 
 
 1. Install camel_tools v1.5.2 or later (you can check this using camel_data -v)
