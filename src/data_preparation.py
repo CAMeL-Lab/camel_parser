@@ -168,7 +168,7 @@ def parse_text(file_type: str, file_type_params: FileTypeParams):
             text_tuples = handle_tokenized_tagged(file_type_params)
 
         # the text tuples created from the above processes is passed to the dependency parser
-        parsed_text_tuples = parse_text_tuples(text_tuples, parse_model=file_type_params.parse_model_path)
+        parsed_text_tuples = parse_text_tuples(text_tuples, parse_model=str(file_type_params.parse_model_path))
         # for text/preprocessed_text, we want to extract the features to place in parsed_text_tuples
         # TODO: check if this step can be skipped by placing features in a step above
         text_feats: List[List[str]] = get_feats_from_text_tuples(text_tuples)
