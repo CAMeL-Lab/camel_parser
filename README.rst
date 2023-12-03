@@ -25,7 +25,13 @@ Installation
 
     pip install -r requirements.txt
 
-*When running the code for the first time, two Arabic script models will be downloaded from Hugging Face; CATiB and UD.*
+3. Download dependency parsing models:
+
+.. code-block:: bash
+
+    python download_models.py
+
+Currently, two Arabic script models, CATiB and UD, will be downloaded from the CAMeL Lab's `parser models collection <https://huggingface.co/collections/CAMeL-Lab/camelparser-654a3df21f70b3b5e72f95d9>`_ on Hugging Face. More models will be added soon!
 
 Examples
 --------
@@ -64,6 +70,12 @@ tokenized_tagged is used when the user has the tokens and POS tags. They should 
     python text_to_conll_cli.py -f tokenized_tagged -s "(جامعة, NOM) (نيويورك, PROP) (أبو, PROP) (ظبي, PROP) (تنشر, VRB) (أول, NOM) (أطلس, NOM) (ل+, PRT) (كوكب, NOM) (المريخ, PROP) (ب+, PRT) (اللغة, NOM) (العربية, NOM) (., PNX)"
 
 
+Extending the code
+------------------
+
+You can also use different parts of the code to create your own pipeline. 
+The handle_multiple_texts.py is an example of that. It can be used to parse a directory of text files. 
+Note that it only prints the results to the command line.
 
 Using another morphology database
 ---------------------------------
