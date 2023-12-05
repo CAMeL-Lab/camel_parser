@@ -37,7 +37,7 @@ Options:
 from pathlib import Path
 from typing import List
 from camel_tools.utils.charmap import CharMapper
-from src.conll_output import print_to_conll
+from src.conll_output import print_to_conll, text_tuples_to_string
 from src.data_preparation import get_file_type_params, parse_text
 from src.utils.model_downloader import get_model_name
 from docopt import docopt
@@ -103,7 +103,8 @@ def main():
         arclean, disambiguator_type, clitic_feats_df, tagset, morphology_db_type)
     parsed_text_tuples = parse_text(file_type, file_type_params)
 
-    print_to_conll(parsed_text_tuples, sentences=lines)
+    string_lines = text_tuples_to_string(parsed_text_tuples, sentences=lines)
+    print_to_conll(string_lines)
 
 if __name__ == '__main__':
     main()

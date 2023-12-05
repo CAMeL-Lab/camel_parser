@@ -6,16 +6,9 @@ from typing import List, Union
 from src.classes import Token
 
 
-def print_to_conll(sentence_tuples, annotations=None, sentences=None):
-    if sentences is not None: 
-        sentences = list(filter(lambda x : len(re.sub(r"\s+", "", x, flags=re.UNICODE)) > 0, sentences))
-    tokens = [[tup[1] for tup in sent] for sent in sentence_tuples]
-    for i in range(len(sentence_tuples)):
-        if sentences != None:
-            print(f"# text = {sentences[i].strip()}")
-            print(f"# treeTokens = {' '.join(tokens[i])}")
-        elif annotations != None:
-            [print(annotation) for annotation in annotations[i]]
+def print_to_conll(string_lines):
+    for line in string_lines:
+        print(line)
 
 def text_tuples_to_string(
         text_tuples: List[List[tuple]], 
