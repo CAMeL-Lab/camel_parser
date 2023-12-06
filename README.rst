@@ -88,8 +88,8 @@ Extending the code
 ------------------
 
 You can also use different parts of the code to create your own pipeline. 
-The handle_multiple_texts.py is an example of that. It can be used to parse a directory of text files. 
-Note that it only prints the results to the command line.
+The handle_multiple_texts.py is an example of that. It can be used to parse a directory of text files, 
+saving the resulting CoNLL-X files to a given output directory.
 
 Using another morphology database
 ---------------------------------
