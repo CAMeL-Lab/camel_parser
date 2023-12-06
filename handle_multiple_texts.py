@@ -3,6 +3,7 @@ Script to handle multiple texts.
 
 Usage:
     text_to_conll_cli (-i <input> | --input=<input>)
+        (-o <output> | --output=<output>)
         [-m <model> | --model=<model>]
         [-t  <tagset>| --tagset=<tagset>]
     text_to_conll_cli (-h | --help)
@@ -10,6 +11,8 @@ Usage:
 Options:
     -i <input> --input=<input>
         A directory of text files
+    -o <output> --output=<output>
+        The directory to save the parsed CoNLL-X files
     -m <model> --model=<model>
         The name BERT model used to parse (to be placed in the model directory) [default: catib]
     -t <tagset> --tagset=<tagset>
@@ -22,7 +25,7 @@ import os
 from pathlib import Path
 from camel_tools.utils.charmap import CharMapper
 from src.classes import TextParams
-from src.conll_output import print_to_conll
+from src.conll_output import print_to_conll, save_to_file, text_tuples_to_string
 from src.data_preparation import parse_text
 from src.initialize_disambiguator.disambiguator_interface import get_disambiguator
 from src.utils.model_downloader import get_model_name
@@ -51,7 +54,8 @@ def main():
     #
     ### cli user input ###
     #
-    folder_path = arguments['--input']
+    input_path = arguments['--input']
+    output_path = arguments['--output']
     parse_model = arguments['--model']
     tagset = arguments['--tagset']
 
@@ -67,7 +71,7 @@ def main():
     #
     ### main code ###
     #
-    for root, _, files in os.walk(folder_path):
+    for root, _, files in os.walk(input_path):
         for text_file in files:
             print(f'processing {text_file}')
             lines = []
@@ -75,8 +79,11 @@ def main():
                 lines = [line for line in f.readlines() if line.strip()]
             file_type_params = TextParams(lines, model_path/model_name, arclean, disambiguator, clitic_feats_df, tagset, "")
             parsed_text_tuples = parse_text("text", file_type_params)
-    
-            print_to_conll(parsed_text_tuples, sentences=lines)
+
+            save_to_file(
+                text_tuples_to_string(parsed_text_tuples, sentences=lines),
+                Path(output_path) / text_file
+            )
 
 if __name__ == '__main__':
     main()

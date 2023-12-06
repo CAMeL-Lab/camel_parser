@@ -1,5 +1,6 @@
 
 
+from pathlib import Path
 import re
 from typing import List, Union
 
@@ -9,6 +10,10 @@ from src.classes import Token
 def print_to_conll(string_lines):
     for line in string_lines:
         print(line)
+
+def save_to_file(string_lines: List[str], file_path: Path):
+    with open(file_path, 'w') as f:
+        [f.write(f'{line}\n') for line in string_lines]
 
 def text_tuples_to_string(
         text_tuples: List[List[tuple]], 
