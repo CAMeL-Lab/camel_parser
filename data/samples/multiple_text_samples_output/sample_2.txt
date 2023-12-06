@@ -1,0 +1,26 @@
+# text = كان في طريقي إلى المطار حادث وخشيت أن تفوتني الرحلة،
+# treeTokens = كان في طريق +ي إلى المطار حادث و+ خشيت أن تفوت +ني الرحلة ,
+1	كان	كان	VRB	_	ud=VERB|pos=verb|prc3=0|prc2=0|prc1=0|prc0=0|enc0=0|asp=p|vox=a|mod=i|gen=m|num=s|stt=na|cas=na|per=3|rat=n|token_type=baseword	0	---	_	_
+2	في	في	PRT	_	ud=ADP|pos=prep|prc3=0|prc2=0|prc1=0|prc0=na|enc0=0|asp=na|vox=na|mod=na|gen=na|num=na|stt=na|cas=na|per=na|rat=na|token_type=baseword	1	PRD	_	_
+3	طريق	طريق	NOM	_	ud=NOUN|pos=noun|prc3=0|prc2=0|prc1=0|prc0=0|enc0=0|asp=na|vox=na|mod=na|gen=m|num=s|stt=c|cas=u|per=na|rat=i|token_type=baseword	2	OBJ	_	_
+4	+ي	+ي	NOM	_	ud=PRON|pos=pron|prc3=0|prc2=0|prc1=0|prc0=0|enc0=0|asp=na|vox=na|mod=na|gen=m|num=s|stt=d|cas=g|per=1|rat=na|token_type=enc0	3	IDF	_	_
+5	إلى	إلى	PRT	_	ud=ADP|pos=prep|prc3=0|prc2=0|prc1=0|prc0=na|enc0=0|asp=na|vox=na|mod=na|gen=na|num=na|stt=na|cas=na|per=na|rat=na|token_type=baseword	3	MOD	_	_
+6	المطار	مطار	NOM	_	ud=NOUN|pos=noun|prc3=0|prc2=0|prc1=0|prc0=Al_det|enc0=0|asp=na|vox=na|mod=na|gen=m|num=s|stt=d|cas=g|per=na|rat=i|token_type=baseword	5	OBJ	_	_
+7	حادث	حادث	NOM	_	ud=NOUN|pos=noun|prc3=0|prc2=0|prc1=0|prc0=0|enc0=0|asp=na|vox=na|mod=na|gen=m|num=s|stt=i|cas=n|per=na|rat=i|token_type=baseword	1	SBJ	_	_
+8	و+	و+	PRT	_	ud=CCONJ|pos=conj|prc3=0|prc2=0|prc1=0|prc0=na|per=na|asp=na|vox=na|mod=na|gen=na|num=na|stt=na|cas=na|enc0=0|rat=na|token_type=prc2	1	MOD	_	_
+9	خشيت	خشي	VRB	_	ud=VERB|pos=verb|prc3=0|prc2=0|prc1=0|prc0=0|per=1|asp=p|vox=a|mod=i|gen=m|num=s|stt=na|cas=na|enc0=0|rat=n|token_type=baseword	8	OBJ	_	_
+10	أن	أن	PRT	_	ud=SCONJ|pos=conj_sub|prc3=0|prc2=0|prc1=0|prc0=na|enc0=0|asp=na|vox=na|mod=na|gen=na|num=na|stt=na|cas=na|per=na|rat=na|token_type=baseword	9	OBJ	_	_
+11	تفوت	فات	VRB	_	ud=VERB|pos=verb|prc3=0|prc2=0|prc1=0|prc0=0|enc0=0|asp=i|vox=a|mod=u|gen=f|num=s|stt=na|cas=na|per=3|rat=n|token_type=baseword	10	OBJ	_	_
+12	+ني	+ني	NOM	_	ud=PRON|pos=pron|prc3=0|prc2=0|prc1=0|prc0=0|enc0=0|asp=na|vox=na|mod=na|gen=m|num=s|stt=d|cas=a|per=1|rat=na|token_type=enc0	11	OBJ	_	_
+13	الرحلة	رحلة	NOM	_	ud=NOUN|pos=noun|prc3=0|prc2=0|prc1=0|prc0=Al_det|enc0=0|asp=na|vox=na|mod=na|gen=f|num=s|stt=d|cas=n|per=na|rat=i|token_type=baseword	11	SBJ	_	_
+14	,	,	PNX	_	ud=PUNCT|pos=punc|prc3=na|prc2=na|prc1=na|prc0=na|enc0=na|asp=na|vox=na|mod=na|gen=na|num=na|stt=na|cas=na|per=na|rat=na|token_type=baseword	1	MOD	_	_
+
+# text = وهل سيشرحونها؟
+# treeTokens = و+ هل س+ يشرحون +ها ?
+1	و+	و+	PRT	_	ud=CCONJ|pos=conj|prc3=0|prc2=0|prc1=0|prc0=na|per=na|asp=na|vox=na|mod=na|gen=na|num=na|stt=na|cas=na|enc0=0|rat=na|token_type=prc2	4	MOD	_	_
+2	هل	هل	PRT	_	ud=PART|pos=part_interrog|prc3=0|prc2=0|prc1=0|prc0=na|per=na|asp=na|vox=na|mod=na|gen=na|num=na|stt=na|cas=na|enc0=0|rat=na|token_type=baseword	4	MOD	_	_
+3	س+	س+	PRT	_	ud=AUX|pos=part_fut|prc3=0|prc2=0|prc1=0|prc0=na|per=na|asp=na|vox=na|mod=na|gen=na|num=na|stt=na|cas=na|enc0=0|rat=na|token_type=prc1	4	MOD	_	_
+4	يشرحون	شرح	VRB	_	ud=VERB|pos=verb|prc3=0|prc2=0|prc1=0|prc0=0|per=3|asp=i|vox=a|mod=i|gen=m|num=p|stt=na|cas=na|enc0=0|rat=n|token_type=baseword	0	---	_	_
+5	+ها	+ها	NOM	_	ud=PRON|pos=pron|prc3=0|prc2=0|prc1=0|prc0=0|per=3|asp=na|vox=na|mod=na|gen=f|num=s|stt=d|cas=a|enc0=0|rat=na|token_type=enc0	4	OBJ	_	_
+6	?	?	PNX	_	ud=PUNCT|pos=punc|prc3=na|prc2=na|prc1=na|prc0=na|enc0=na|asp=na|vox=na|mod=na|gen=na|num=na|stt=na|cas=na|per=na|rat=na|token_type=baseword	4	MOD	_	_
+
