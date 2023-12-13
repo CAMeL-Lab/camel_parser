@@ -11,10 +11,10 @@ Introduction
 CamelParser is an open-source Python-based Arabic dependency parser targeting two popular 
 Arabic dependency formalisms, the Columbia Arabic Treebank (CATiB), and Universal Dependencies (UD).
 
-The CamelParser pipeline handles the processing of raw text and roduces tokenization, 
+The CamelParser pipeline handles the processing of raw text and produces tokenization, 
 part-of-speech and rich morphological features. For disambiguation, users can choose between 
 the BERT unfactored disambiguator, or a lighter Maximum Likelihood Estimation (MLE) disambiguator, 
-both of which are included in CAMeL Tools. For depednecy parsing, we use the SuPar Biaffine Dependency Parser.
+both of which are included in CAMeL Tools. For dependency parsing, we use the SuPar Biaffine Dependency Parser.
 
 
 Installation
