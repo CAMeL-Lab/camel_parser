@@ -95,23 +95,8 @@ def handle_conll(file_type_params):
 def handle_preprocessed_text(file_type_params):
     lines, _, disambiguator_param, clitic_feats_df, tagset, morphology_db_type = file_type_params
 
-    token_lines = split_lines_words(lines)
-
-    if type(disambiguator_param) == str:
-        disambiguator = get_disambiguator(disambiguator_param, morphology_db_type)
-    else: # a disambiguator was passed
-        disambiguator = disambiguator_param
-    # run the disambiguator on the sentence list to get an analysis for all sentences
-    disambiguated_sentences: List[List[DisambiguatedWord]] = disambiguator.disambiguate_sentences(token_lines)
-    # get a single analysis for each word (top or match, match not implemented yet)
-    sentence_analysis_list: List[List[dict]] = to_sentence_analysis_list(disambiguated_sentences)
-    # extract the relevant items from each analysis into conll fields
-    return to_conll_fields_list(sentence_analysis_list, clitic_feats_df, tagset)
-
-def handle_text(file_type_params):
-    lines, _, arclean, disambiguator_param, clitic_feats_df, tagset, morphology_db_type = file_type_params
-    # clean lines
-    token_lines = clean_lines(lines, arclean)
+        token_lines = split_lines_words(lines)
+        token_lines = clean_mad(token_lines)
 
     # if str passed, we should create the disambiguator using disambiguator_param and morphology_db_type
     if type(disambiguator_param) == str:

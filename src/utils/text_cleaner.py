@@ -9,6 +9,19 @@ def clean_line(line, arclean):
 def split_lines_words(lines):
     return [line.strip().split() for line in lines]
 
+def clean_mad(lines):
+    new_lines = []
+    for line in lines:
+        new_line = []
+        for word in line:
+            # replacing underscore with mad character
+            if word == 'ـ':
+                new_line.append('_')
+            else:
+                new_line.append(word)
+        new_lines.append(new_line)
+    return new_lines
+
 def clean_lines(lines, arclean):
     return [clean_line(line, arclean) for line in lines]
 
