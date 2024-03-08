@@ -5,7 +5,7 @@ from supar.utils import Dataset
 
 from camel_tools.utils.dediac import dediac_ar
 
-from src.logger import log
+from ..logger import log
 
 """
 conll object from parser

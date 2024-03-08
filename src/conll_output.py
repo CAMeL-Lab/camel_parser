@@ -4,7 +4,7 @@ from pathlib import Path
 import re
 from typing import List, Union
 
-from src.classes import Token
+from .classes import Token
 
 
 def print_to_conll(string_lines):

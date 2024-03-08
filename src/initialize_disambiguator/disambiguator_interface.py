@@ -3,9 +3,9 @@ from camel_tools.morphology.database import MorphologyDB
 from camel_tools.morphology.analyzer import Analyzer
 from camel_tools.disambig.bert import BERTUnfactoredDisambiguator
 
-from src.logger import log
-from src.initialize_disambiguator.bert_disambiguator import create_bert_disambiguator
-from src.initialize_disambiguator.mle_disambiguator import MLEDisambiguatorAdapter
+from ..logger import log
+from .bert_disambiguator import create_bert_disambiguator
+from .mle_disambiguator import MLEDisambiguatorAdapter
 
 def set_up_analyzer(morphology_db: str) -> Analyzer:
     # used to initialize an Analyzer with ADD_PROP backoff 

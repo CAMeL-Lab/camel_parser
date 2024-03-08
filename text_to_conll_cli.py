@@ -35,15 +35,12 @@ Options:
 """
 
 from pathlib import Path
-from typing import List
 from camel_tools.utils.charmap import CharMapper
 from src.conll_output import print_to_conll, text_tuples_to_string
 from src.data_preparation import get_file_type_params, parse_text
 from src.utils.model_downloader import get_model_name
 from docopt import docopt
 from transformers.utils import logging
-from datetime import datetime
-import time
 from pandas import read_csv
 
 arguments = docopt(__doc__)

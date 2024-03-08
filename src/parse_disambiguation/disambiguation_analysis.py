@@ -1,6 +1,6 @@
 from typing import List
 from camel_tools.disambig.common import DisambiguatedWord
-from src.classes import Token
+from ..classes import Token
 
 def get_analysis_by_criteria(disambig_word: DisambiguatedWord, selection_criteria: dict) -> dict:
     # runs assertions to ensure the data is good

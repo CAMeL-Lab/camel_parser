@@ -25,7 +25,7 @@ import os
 from pathlib import Path
 from camel_tools.utils.charmap import CharMapper
 from src.classes import TextParams
-from src.conll_output import print_to_conll, save_to_file, text_tuples_to_string
+from src.conll_output import save_to_file, text_tuples_to_string
 from src.data_preparation import parse_text
 from src.initialize_disambiguator.disambiguator_interface import get_disambiguator
 from src.utils.model_downloader import get_model_name

@@ -3,13 +3,13 @@ import re
 from typing import List, Union
 import pandas as pd
 from camel_tools.disambig.common import DisambiguatedWord
-from src.classes import ConllParams, TextParams, PreprocessedTextParams, TokenizedParams, TokenizedTaggedParams
-from src.dependency_parser.biaff_parser import parse_conll, parse_text_tuples
-from src.initialize_disambiguator.disambiguator_interface import get_disambiguator
-from src.parse_disambiguation.disambiguation_analysis import to_sentence_analysis_list
-from src.parse_disambiguation.feature_extraction import to_conll_fields_list
-from src.utils.text_cleaner import clean_lines, clean_mad, split_lines_words
-from src.logger import log
+from .classes import ConllParams, TextParams, PreprocessedTextParams, TokenizedParams, TokenizedTaggedParams
+from .dependency_parser.biaff_parser import parse_conll, parse_text_tuples
+from .initialize_disambiguator.disambiguator_interface import get_disambiguator
+from .parse_disambiguation.disambiguation_analysis import to_sentence_analysis_list
+from .parse_disambiguation.feature_extraction import to_conll_fields_list
+from .utils.text_cleaner import clean_lines, clean_mad, split_lines_words
+from .logger import log
 
 
 FileTypeParams = Union[ConllParams, TextParams, PreprocessedTextParams, TokenizedParams, TokenizedTaggedParams]
