@@ -7,7 +7,6 @@ Usage:
         [-b <morphology_db_type> | --morphology_db_type=<morphology_db_type>]
         [-d <disambiguator> | --disambiguator=<disambiguator>]
         [-m <model> | --model=<model>]
-        [-t  <tagset>| --tagset=<tagset>]
     text_to_conll_cli (-h | --help)
 
 Options:
@@ -28,8 +27,6 @@ Options:
         The disambiguation technique used to tokenize the text lines, either 'mle' or 'bert' [default: bert]
     -m <model> --model=<model>
         The name BERT model used to parse (to be placed in the model directory) [default: catib]
-    -t <tagset> --tagset=<tagset>
-        Selecting either catib6 or UD as the POS tagset [default: catib6]
     -h --help
         Show this screen.
 """
@@ -37,7 +34,7 @@ Options:
 from pathlib import Path
 from camel_tools.utils.charmap import CharMapper
 from src.conll_output import print_to_conll, text_tuples_to_string
-from src.data_preparation import get_file_type_params, parse_text
+from src.data_preparation import get_file_type_params, get_tagset, parse_text
 from src.utils.model_downloader import get_model_name
 from docopt import docopt
 from transformers.utils import logging
@@ -76,7 +73,6 @@ def main():
     morphology_db_type = arguments['--morphology_db_type']
     disambiguator_type = arguments['--disambiguator']
     parse_model = arguments['--model']
-    tagset = arguments['--tagset']
 
 
     #
@@ -84,6 +80,12 @@ def main():
     # (download defaults models, and get correct model name from the models directory)
     #
     model_name = get_model_name(parse_model, model_path=model_path)
+
+    # 
+    ### get tagset (depends on model)
+    #
+    tagset = get_tagset(parse_model)
+    
     
     #
     ### main code ###

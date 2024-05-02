@@ -5,7 +5,6 @@ Usage:
     text_to_conll_cli (-i <input> | --input=<input>)
         (-o <output> | --output=<output>)
         [-m <model> | --model=<model>]
-        [-t  <tagset>| --tagset=<tagset>]
     text_to_conll_cli (-h | --help)
 
 Options:
@@ -15,8 +14,6 @@ Options:
         The directory to save the parsed CoNLL-X files
     -m <model> --model=<model>
         The name BERT model used to parse (to be placed in the model directory) [default: catib]
-    -t <tagset> --tagset=<tagset>
-        Selecting either catib6 or UD as the POS tagset [default: catib6]
     -h --help
         Show this screen.
 """

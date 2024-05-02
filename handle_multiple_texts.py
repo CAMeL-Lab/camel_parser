@@ -5,7 +5,6 @@ Usage:
     text_to_conll_cli (-i <input> | --input=<input>)
         (-o <output> | --output=<output>)
         [-m <model> | --model=<model>]
-        [-t  <tagset>| --tagset=<tagset>]
     text_to_conll_cli (-h | --help)
 
 Options:
@@ -15,8 +14,6 @@ Options:
         The directory to save the parsed CoNLL-X files
     -m <model> --model=<model>
         The name BERT model used to parse (to be placed in the model directory) [default: catib]
-    -t <tagset> --tagset=<tagset>
-        Selecting either catib6 or UD as the POS tagset [default: catib6]
     -h --help
         Show this screen.
 """
@@ -26,7 +23,7 @@ from pathlib import Path
 from camel_tools.utils.charmap import CharMapper
 from src.classes import TextParams
 from src.conll_output import save_to_file, text_tuples_to_string
-from src.data_preparation import parse_text
+from src.data_preparation import get_tagset, parse_text
 from src.initialize_disambiguator.disambiguator_interface import get_disambiguator
 from src.utils.model_downloader import get_model_name
 from docopt import docopt
@@ -57,7 +54,6 @@ def main():
     input_path = arguments['--input']
     output_path = arguments['--output']
     parse_model = arguments['--model']
-    tagset = arguments['--tagset']
 
 
     #
@@ -65,6 +61,11 @@ def main():
     # (download defaults models, and get correct model name from the models directory)
     #
     model_name = get_model_name(parse_model, model_path=model_path)
+    
+    # 
+    ### get tagset (depends on model)
+    #
+    tagset = get_tagset(parse_model)
     
     disambiguator = get_disambiguator("bert", "r13")
     

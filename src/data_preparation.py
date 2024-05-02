@@ -177,3 +177,11 @@ def parse_text(file_type: str, file_type_params: FileTypeParams):
         parsed_text_tuples = add_feats(parsed_text_tuples, text_feats)
 
     return parsed_text_tuples
+
+def get_tagset(parse_model):
+    if parse_model == 'catib':
+        return 'catib6'
+    elif parse_model == 'ud':
+        return 'ud'
+    else:
+        raise f'{parse_model} model does not exist!'
