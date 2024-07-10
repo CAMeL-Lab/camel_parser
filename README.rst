@@ -88,8 +88,7 @@ Using a custom model
 ------------------
 You can use your own dependency parser models by
 
-1. placing the model in the models directory (this directory is created when you run download_models.py, 
-but you can create it yourself)
+1. placing the model in the models directory (this directory is created when you run download_models.py, but you can create it yourself)
 
 2. place your model in the models directory
 
