@@ -92,6 +92,11 @@ def handle_conll(file_type_params):
     # pass the path to the text file and the model path and name, and get the tuples
     return parse_conll(file_path, parse_model=parse_model_path)
 
+@log
+def disambiguate_sentences(disambiguator, token_lines):
+    # moved to own function to add to logger
+    return disambiguator.disambiguate_sentences(token_lines)
+
 def handle_text_types(file_type_params, text_type: str):
     if text_type == 'preprocessed_text':
         lines, _, disambiguator_param, clitic_feats_df, tagset, morphology_db_type = file_type_params
@@ -113,7 +118,7 @@ def handle_text_types(file_type_params, text_type: str):
         disambiguator = disambiguator_param
     
     # run the disambiguator on the sentence list to get an analysis for all sentences
-    disambiguated_sentences: List[List[DisambiguatedWord]] = disambiguator.disambiguate_sentences(token_lines)
+    disambiguated_sentences: List[List[DisambiguatedWord]] = disambiguate_sentences(disambiguator, token_lines)
     # get a single analysis for each word (top or match, match not implemented yet)
     sentence_analysis_list: List[List[dict]] = to_sentence_analysis_list(disambiguated_sentences)
     # extract the relevant items from each analysis into conll fields

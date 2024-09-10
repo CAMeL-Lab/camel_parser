@@ -31,6 +31,7 @@ Options:
         Show this screen.
 """
 
+from src.logger import log
 from pathlib import Path
 from camel_tools.utils.charmap import CharMapper
 from src.conll_output import print_to_conll, text_tuples_to_string
@@ -49,7 +50,7 @@ def get_file_type(file_type):
         return file_type 
     assert False, 'Unknown file type'
 
-
+@log
 def main():
     root_dir = Path(__file__).parent
     model_path = root_dir/"models"

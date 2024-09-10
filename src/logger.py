@@ -20,6 +20,10 @@ def map_function_to_phrase(function_name):
         return "parsing duration"
     elif function_name == "get_disambiguator":
         return "disambiguator setup duration"
+    elif function_name == "disambiguate_sentences":
+        return "disambiguating sentences"
+    elif function_name == "main":
+        return "total execution time"
     else:
         return function_name
 
