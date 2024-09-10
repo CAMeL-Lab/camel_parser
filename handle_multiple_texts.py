@@ -81,9 +81,11 @@ def main():
             file_type_params = TextParams(lines, model_path/model_name, arclean, disambiguator, clitic_feats_df, tagset, "")
             parsed_text_tuples = parse_text("text", file_type_params)
 
+            new_name = '.'.join((text_file.split('.')[:-1])) + '.conllx'
+            
             save_to_file(
                 text_tuples_to_string(parsed_text_tuples, sentences=lines),
-                Path(output_path) / text_file
+                Path(output_path) / new_name
             )
 
 if __name__ == '__main__':
