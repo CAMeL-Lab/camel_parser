@@ -53,7 +53,7 @@ The verbose version of the above example (default values are shown)
 
 .. code-block:: bash
 
-    python text_to_conll_cli.py -f text -b r13 -d bert -m catib -t catib6 -s "جامعة نيويورك أبو ظبي تنشر أول أطلس لكوكب المريخ باللغة العربية."
+    python text_to_conll_cli.py -f text -b r13 -d bert -m catib -s "جامعة نيويورك أبو ظبي تنشر أول أطلس لكوكب المريخ باللغة العربية."
 
 Passing preprocessed text (cleaned and whitespace tokenized)
 
@@ -83,6 +83,16 @@ tokenized_tagged is used when the user has the tokens and POS tags. They should 
     
     python text_to_conll_cli.py -f tokenized_tagged -s "(جامعة, NOM) (نيويورك, PROP) (أبو, PROP) (ظبي, PROP) (تنشر, VRB) (أول, NOM) (أطلس, NOM) (ل+, PRT) (كوكب, NOM) (المريخ, PROP) (ب+, PRT) (اللغة, NOM) (العربية, NOM) (., PNX)"
 
+
+Using a custom model
+------------------
+You can use your own dependency parser models by
+
+1. placing the model in the models directory (this directory is created when you run download_models.py, but you can create it yourself)
+
+2. place your model in the models directory
+
+3. when running one of the scripts, add -m [model_name]. Just type the model name WITHOUT the path.
 
 Extending the code
 ------------------
