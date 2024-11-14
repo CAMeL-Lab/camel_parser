@@ -21,13 +21,17 @@ Installation
 ------------
 1. Clone this repo
 
-2. Install the required packages:
+2. Set up a virtual environment using Python 3.9.16 (you can follow the tutorial `here <https://www.youtube.com/watch?si=g2zx-D0zdkL50knb&v=31WU0Dhw4sk&feature=youtu.be>`_).
+
+Currently, CamelParser does not work with later versions of python due to issues with some dependencies.
+
+3. Install the required packages:
 
 .. code-block:: bash
 
     pip install -r requirements.txt
 
-3. Download dependency parsing models:
+4. Download dependency parsing models:
 
 .. code-block:: bash
 
@@ -83,6 +87,8 @@ tokenized_tagged is used when the user has the tokens and POS tags. They should 
     
     python text_to_conll_cli.py -f tokenized_tagged -s "(جامعة, NOM) (نيويورك, PROP) (أبو, PROP) (ظبي, PROP) (تنشر, VRB) (أول, NOM) (أطلس, NOM) (ل+, PRT) (كوكب, NOM) (المريخ, PROP) (ب+, PRT) (اللغة, NOM) (العربية, NOM) (., PNX)"
 
+
+To use the parser in your code, refer to the `sample_starting_point.py` file.
 
 Using a custom model
 ------------------
