@@ -48,15 +48,16 @@ Below are examples using the different *string* inputs that CamelParser accepts.
 We pass each example as a string using -s. 
 However, we do recommend using the file method (-i) along with the path to the file
 when passing multiple sentences.
+
 You can also refer to the `sample_starting_point.py` to use the parser in your code, or for more advanced usage:
 
 .. code-block:: bash
 
-text_to_conll_cli.py
+    text_to_conll_cli.py
 
-handle_multiple_texts.py
+    handle_multiple_texts.py
 
-handle_multiple_conll_files.py
+    handle_multiple_conll_files.py
 
 Passing text
 
