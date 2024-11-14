@@ -52,7 +52,9 @@ You can also refer to the `sample_starting_point.py` to use the parser in your c
 
 .. code-block:: bash
 text_to_conll_cli.py
+
 handle_multiple_texts.py
+
 handle_multiple_conll_files.py
 
 Passing text
