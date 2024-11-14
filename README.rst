@@ -51,6 +51,7 @@ when passing multiple sentences.
 You can also refer to the `sample_starting_point.py` to use the parser in your code, or for more advanced usage:
 
 .. code-block:: bash
+
 text_to_conll_cli.py
 
 handle_multiple_texts.py
