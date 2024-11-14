@@ -43,9 +43,17 @@ on Hugging Face. More models will be added soon!
 
 Examples
 --------
-Below are examples using the different inputs that CamelParser accepts. 
-We pass each example as a string using -s. However, when passing multiple sentences it is 
-better to use -i along with the path to the file containing the sentences.
+The CamelParser allows users to pass either a string or a file containing **one or more** sentences.
+Below are examples using the different *string* inputs that CamelParser accepts. 
+We pass each example as a string using -s. 
+However, we do recommend using the file method (-i) along with the path to the file
+when passing multiple sentences.
+You can also refer to the `sample_starting_point.py` to use the parser in your code, or for more advanced usage:
+
+.. code-block:: bash
+text_to_conll_cli.py
+handle_multiple_texts.py
+handle_multiple_conll_files.py
 
 Passing text
 
@@ -87,8 +95,6 @@ tokenized_tagged is used when the user has the tokens and POS tags. They should 
     
     python text_to_conll_cli.py -f tokenized_tagged -s "(جامعة, NOM) (نيويورك, PROP) (أبو, PROP) (ظبي, PROP) (تنشر, VRB) (أول, NOM) (أطلس, NOM) (ل+, PRT) (كوكب, NOM) (المريخ, PROP) (ب+, PRT) (اللغة, NOM) (العربية, NOM) (., PNX)"
 
-
-To use the parser in your code, refer to the `sample_starting_point.py` file.
 
 Using a custom model
 ------------------
