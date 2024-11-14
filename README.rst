@@ -49,7 +49,7 @@ We pass each example as a string using -s.
 However, we do recommend using the file method (-i) along with the path to the file
 when passing multiple sentences.
 
-You can also refer to the `sample_starting_point.py` to use the parser in your code, or for more advanced usage:
+You can also refer to the **sample_starting_point.py** to use the parser in your code, or for more advanced usage:
 
 .. code-block:: bash
 
