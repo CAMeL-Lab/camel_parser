@@ -1,0 +1,25 @@
+# text = هناك ، أمام بيانات السائح تماما .
+# treeTokens = هناك ، أمام بيانات السائح تماما .
+1	هناك	هناك	NOM	_	ud=ADV|pos=adv|prc3=0|prc2=0|prc1=0|prc0=0|enc0=0|asp=na|vox=na|mod=na|gen=u|num=u|stt=i|cas=u|per=na|rat=y|token_type=baseword	3	MOD	_	_
+2	،	،	PNX	_	ud=PUNCT|pos=punc|prc3=na|prc2=na|prc1=na|prc0=na|enc0=na|asp=na|vox=na|mod=na|gen=na|num=na|stt=na|cas=na|per=na|rat=na|token_type=baseword	1	MOD	_	_
+3	أمام	أمام	NOM	_	ud=NOUN|pos=noun|prc3=0|prc2=0|prc1=0|prc0=0|enc0=0|asp=na|vox=na|mod=na|gen=m|num=s|stt=c|cas=a|per=na|rat=i|token_type=baseword	0	---	_	_
+4	بيانات	بيان	NOM	_	ud=NOUN|pos=noun|prc3=0|prc2=0|prc1=0|prc0=0|enc0=0|asp=na|vox=na|mod=na|gen=m|num=p|stt=c|cas=g|per=na|rat=i|token_type=baseword	3	IDF	_	_
+5	السائح	سائح	NOM	_	ud=NOUN|pos=noun|prc3=0|prc2=0|prc1=0|prc0=Al_det|enc0=0|asp=na|vox=na|mod=na|gen=m|num=s|stt=d|cas=g|per=na|rat=r|token_type=baseword	4	IDF	_	_
+6	تماما	تمام	NOM	_	ud=NOUN|pos=noun|prc3=0|prc2=0|prc1=0|prc0=0|enc0=0|asp=na|vox=na|mod=na|gen=m|num=s|stt=i|cas=a|per=na|rat=i|token_type=baseword	3	MOD	_	_
+7	.	.	PNX	_	ud=PUNCT|pos=punc|prc3=na|prc2=na|prc1=na|prc0=na|enc0=na|asp=na|vox=na|mod=na|gen=na|num=na|stt=na|cas=na|per=na|rat=na|token_type=baseword	3	MOD	_	_
+
+# text = لم اسمع بهذا العنوان من قبل بالقرب من هنا .
+# treeTokens = لم أسمع ب+ هذا العنوان من قبل ب+ القرب من هنا .
+1	لم	لم	PRT	_	ud=PART|pos=part_neg|prc3=0|prc2=0|prc1=0|prc0=na|enc0=0|asp=na|vox=na|mod=na|gen=na|num=na|stt=na|cas=na|per=na|rat=na|token_type=baseword	2	MOD	_	_
+2	أسمع	سمع	VRB	_	ud=VERB|pos=verb|prc3=0|prc2=0|prc1=0|prc0=0|enc0=0|asp=i|vox=a|mod=j|gen=m|num=s|stt=na|cas=na|per=1|rat=n|token_type=baseword	0	---	_	_
+3	ب+	ب+	PRT	_	ud=ADP|pos=prep|prc3=0|prc2=0|prc1=0|prc0=na|per=na|asp=na|vox=na|mod=na|gen=na|num=na|stt=na|cas=na|enc0=0|rat=na|token_type=prc1	2	MOD	_	_
+4	هذا	هذا	NOM	_	ud=DET|pos=pron_dem|prc3=0|prc2=0|prc1=0|prc0=0|per=na|asp=na|vox=na|mod=na|gen=m|num=s|stt=i|cas=u|enc0=0|rat=y|token_type=baseword	5	MOD	_	_
+5	العنوان	عنوان	NOM	_	ud=NOUN|pos=noun|prc3=0|prc2=0|prc1=0|prc0=Al_det|enc0=0|asp=na|vox=na|mod=na|gen=m|num=s|stt=d|cas=g|per=na|rat=i|token_type=baseword	3	OBJ	_	_
+6	من	من	PRT	_	ud=ADP|pos=prep|prc3=0|prc2=0|prc1=0|prc0=na|enc0=0|asp=na|vox=na|mod=na|gen=na|num=na|stt=na|cas=na|per=na|rat=na|token_type=baseword	2	MOD	_	_
+7	قبل	قبل	NOM	_	ud=NOUN|pos=noun|prc3=0|prc2=0|prc1=0|prc0=0|enc0=0|asp=na|vox=na|mod=na|gen=m|num=s|stt=c|cas=n|per=na|rat=i|token_type=baseword	6	OBJ	_	_
+8	ب+	ب+	PRT	_	ud=ADP|pos=prep|prc3=0|prc2=0|prc1=0|prc0=na|per=na|asp=na|vox=na|mod=na|gen=na|num=na|stt=na|cas=na|enc0=0|rat=na|token_type=prc1	2	MOD	_	_
+9	القرب	قرب	NOM	_	ud=NOUN|pos=noun|prc3=0|prc2=0|prc1=0|prc0=Al_det|per=na|asp=na|vox=na|mod=na|gen=m|num=s|stt=d|cas=g|enc0=0|rat=i|token_type=baseword	8	OBJ	_	_
+10	من	من	PRT	_	ud=ADP|pos=prep|prc3=0|prc2=0|prc1=0|prc0=na|enc0=0|asp=na|vox=na|mod=na|gen=na|num=na|stt=na|cas=na|per=na|rat=na|token_type=baseword	9	MOD	_	_
+11	هنا	هنا	NOM	_	ud=ADV|pos=adv|prc3=0|prc2=0|prc1=0|prc0=0|enc0=0|asp=na|vox=na|mod=na|gen=u|num=u|stt=i|cas=u|per=na|rat=y|token_type=baseword	10	OBJ	_	_
+12	.	.	PNX	_	ud=PUNCT|pos=punc|prc3=na|prc2=na|prc1=na|prc0=na|enc0=na|asp=na|vox=na|mod=na|gen=na|num=na|stt=na|cas=na|per=na|rat=na|token_type=baseword	2	MOD	_	_
+
