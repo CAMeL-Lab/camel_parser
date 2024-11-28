@@ -119,9 +119,9 @@ def get_lemmas(lemma, tokens):
     lemmas = []
     for token in tokens:
         if '+' in token:
-            lemmas.append(token)
+            lemmas.append(dediac_ar(token))
         else:
-            lemmas.append(lemma)
+            lemmas.append(dediac_ar(lemma))
     return lemmas
 
 def get_main_features_df(word_analysis):
@@ -130,7 +130,7 @@ def get_main_features_df(word_analysis):
         tokens = [word_analysis['atbtok']]
         catib6 = [word_analysis['catib6']]
         ud = [word_analysis['ud']]
-        lemmas = [word_analysis['lex']]
+        lemmas = [dediac_ar(word_analysis['lex'])]
     else:    
         tokens = word_analysis['atbtok'].split('_')
         catib6 = word_analysis['catib6'].split('+')
