@@ -18,8 +18,13 @@ def save_to_file(string_lines: List[str], file_path: Path):
 def text_tuples_to_string(
         text_tuples: List[List[tuple]], 
         annotations: Union[List[str], None]=None, 
-        sentences: Union[List[str], None]=None
+        sentences: Union[List[str], None]=None,
+        is_conll=False
     ):
+    if is_conll: # file is conll already, so extract text lines only
+        matcher = re.compile(r'^(\s*|# text.*)$', re.MULTILINE)
+        sentences = matcher.findall(''.join(sentences))
+        sentences = [sentence[9:] for sentence in sentences]
     if sentences is not None: 
         # filter out empty lines
         sentences = list(filter(lambda x : len(re.sub(r"\s+", "", x, flags=re.UNICODE)) > 0, sentences))
