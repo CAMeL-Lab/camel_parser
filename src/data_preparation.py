@@ -1,8 +1,11 @@
 
+import os
 import re
 from typing import List, Union
 import pandas as pd
 from camel_tools.disambig.common import DisambiguatedWord
+
+from src.utils.conll_fixes import adjust_eof_newlines
 from .classes import ConllParams, TextParams, PreprocessedTextParams, TokenizedParams, TokenizedTaggedParams
 from .dependency_parser.biaff_parser import parse_conll, parse_text_tuples
 from .initialize_disambiguator.disambiguator_interface import get_disambiguator
@@ -161,6 +164,7 @@ def get_file_type_params(lines, file_type, file_path, parse_model_path,
 def parse_text(file_type: str, file_type_params: FileTypeParams):
     if file_type == 'conll':
         # handle_conll(file_path, parse_model_path)
+        adjust_eof_newlines(file_type_params.file_path)
         parsed_text_tuples = handle_conll(file_type_params)
     else:
         text_tuples: List[List[tuple]] = []

@@ -103,7 +103,7 @@ def main():
         arclean, disambiguator_type, clitic_feats_df, tagset, morphology_db_type)
     parsed_text_tuples = parse_text(file_type, file_type_params)
 
-    string_lines = text_tuples_to_string(parsed_text_tuples, sentences=lines)
+    string_lines = text_tuples_to_string(parsed_text_tuples, file_type, sentences=lines)
     print_to_conll(string_lines)
 
 if __name__ == '__main__':
