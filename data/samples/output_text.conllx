@@ -72,3 +72,4 @@
 4	يشرحون	شرح	VRB	_	ud=VERB|pos=verb|prc3=0|prc2=0|prc1=0|prc0=0|per=3|asp=i|vox=a|mod=i|gen=m|num=p|stt=na|cas=na|enc0=0|rat=n|token_type=baseword	0	---	_	_
 5	+ها	+ها	NOM	_	ud=PRON|pos=pron|prc3=0|prc2=0|prc1=0|prc0=0|per=3|asp=na|vox=na|mod=na|gen=f|num=s|stt=d|cas=a|enc0=0|rat=na|token_type=enc0	4	OBJ	_	_
 6	?	?	PNX	_	ud=PUNCT|pos=punc|prc3=na|prc2=na|prc1=na|prc0=na|enc0=na|asp=na|vox=na|mod=na|gen=na|num=na|stt=na|cas=na|per=na|rat=na|token_type=baseword	4	MOD	_	_
+
