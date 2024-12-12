@@ -17,10 +17,11 @@ def save_to_file(string_lines: List[str], file_path: Path):
 
 def text_tuples_to_string(
         text_tuples: List[List[tuple]], 
+        file_type,
         annotations: Union[List[str], None]=None, 
         sentences: Union[List[str], None]=None
     ):
-    if sentences is not None: 
+    if sentences is not None and file_type != 'conll': 
         # filter out empty lines
         sentences = list(filter(lambda x : len(re.sub(r"\s+", "", x, flags=re.UNICODE)) > 0, sentences))
     # get treeTokens
@@ -28,7 +29,9 @@ def text_tuples_to_string(
 
     string_lines: List[str] = []
     for i, sentence_tuples in enumerate(text_tuples):
-        if sentences:
+        if file_type == 'conll': # dont add comments to preexisting conll files
+            pass
+        elif sentences:
             string_lines.extend(
                 (
                     f"# text = {sentences[i].strip()}",

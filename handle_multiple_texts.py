@@ -84,7 +84,7 @@ def main():
             new_name = '.'.join((text_file.split('.')[:-1])) + '.conllx'
             
             save_to_file(
-                text_tuples_to_string(parsed_text_tuples, sentences=lines),
+                text_tuples_to_string(parsed_text_tuples, file_type='text', sentences=lines),
                 Path(output_path) / new_name
             )
 

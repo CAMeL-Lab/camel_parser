@@ -57,7 +57,7 @@ if __name__ == '__main__':
     file_type_params = TextParams(sentences, model_path/model_name, arclean, disambiguator, clitic_feats_df, tagset, "")
     parsed_text_tuples = parse_text("text", file_type_params)
     
-    trees_string = text_tuples_to_string(parsed_text_tuples, sentences=sentences) # NOTE: we use the original sentences in the final conll file.
+    trees_string = text_tuples_to_string(parsed_text_tuples, file_type='text', sentences=sentences) # NOTE: we use the original sentences in the final conll file.
     
     # optional: save your conll file by passing the trees_string and output path + new name of file
     # The new file would be of the type .conllx
