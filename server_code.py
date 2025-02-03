@@ -3,12 +3,11 @@
 import datetime
 import os
 import random
-from camel_parser.src.initialize_disambiguator.disambiguator_interface import get_disambiguator
-from parse_limit import get_lines_to_parse, unparsed_lines_to_conll
-from camel_parser.src.conll_output import text_tuples_to_string
-from camel_parser.src.data_preparation import get_file_type_params, parse_text
-import flask
-from flask import request
+from src.initialize_disambiguator.disambiguator_interface import get_disambiguator
+from src.parse_limit import get_lines_to_parse, unparsed_lines_to_conll
+from src.conll_output import text_tuples_to_string
+from src.data_preparation import get_file_type_params, parse_text
+from flask import request, Flask
 from pandas import read_csv
 from camel_tools.utils.charmap import CharMapper
 
@@ -23,7 +22,7 @@ from dotenv import load_dotenv
 load_dotenv(".env")
 
 
-project_dir = os.path.expanduser("~/palmyra_server/palmyra_server")
+project_dir = os.path.expanduser(".")
 # for local dev
 # project_dir = os.path.expanduser('.')
 
@@ -33,7 +32,7 @@ arclean = CharMapper.builtin_mapper("arclean")
 #
 ### Get clitic features
 #
-clitic_feats_df = read_csv(f"{project_dir}/camel_parser/data/clitic_feats.csv")
+clitic_feats_df = read_csv(f"{project_dir}/data/clitic_feats.csv")
 # so ints read are treated as string objects
 clitic_feats_df = clitic_feats_df.astype(str).astype(object)
 
@@ -53,7 +52,7 @@ API_VERSION = "v3"
 
 PARSE_WORD_LIMIT = 100
 
-app = flask.Flask(__name__)
+app = Flask(__name__)
 # Note: A secret key is included in the sample so that it works.
 # If you use this code in your application, replace this with a truly secret
 # key. See https://flask.palletsprojects.com/quickstart/#sessions.
@@ -91,7 +90,7 @@ def parse_data():
         lines,
         file_type,
         "",
-        f"{project_dir}/camel_parser/models/{parser_model_name}",
+        f"{project_dir}/models/{parser_model_name}",
         arclean,
         disambiguator,
         clitic_feats_df,
@@ -100,7 +99,7 @@ def parse_data():
     )
     parsed_text_tuples = parse_text(file_type, file_type_params)
 
-    string_lines = text_tuples_to_string(parsed_text_tuples, sentences=lines)
+    string_lines = text_tuples_to_string(parsed_text_tuples, 'text', sentences=lines)
 
     # add parsed lines to unparsed lines
     if lines_to_ignore:
