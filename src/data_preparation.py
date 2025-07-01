@@ -122,8 +122,10 @@ def handle_text_types(file_type_params, text_type: str):
     
     # run the disambiguator on the sentence list to get an analysis for all sentences
     disambiguated_sentences: List[List[DisambiguatedWord]] = disambiguate_sentences(disambiguator, token_lines)
-    # get a single analysis for each word (top or match, match not implemented yet)
-    sentence_analysis_list: List[List[dict]] = to_sentence_analysis_list(disambiguated_sentences)
+    # get a single analysis for each word (top or tok_match, match not implemented yet)
+    # sentence_analysis_list: List[List[dict]] = to_sentence_analysis_list(disambiguated_sentences, selection, selection_criteria)
+    sentence_analysis_list: List[List[dict]] = to_sentence_analysis_list(disambiguated_sentences, token_lines)
+    
     # extract the relevant items from each analysis into conll fields
     return to_conll_fields_list(sentence_analysis_list, clitic_feats_df, tagset)
     
