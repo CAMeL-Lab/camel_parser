@@ -6,6 +6,8 @@ from camel_tools.disambig.bert import BERTUnfactoredDisambiguator
 from camel_tools.disambig.mle import MLEDisambiguator
 from camel_tools.utils.charmap import CharMapper
 
+def get_conll_tree_header_list():
+    return ["ID", "FORM", "LEMMA", "UPOS", "XPOS", "FEATS", "HEAD", "DEPREL", "DEPS", "MISC"]
 
 @dataclass
 class ConllParams:
