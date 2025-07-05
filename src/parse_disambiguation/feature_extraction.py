@@ -106,7 +106,7 @@ def add_remaining_features(tokens_df, stem_feats, clitic_feats):
             if token == 'لِ+' and \
                 (stem_feats == {'pos': 'conj_sub', 'prc3': '0', 'prc2': '0', 'prc1': '0', 'prc0': 'na', 'enc0': 'lA_neg', 'asp': 'na', 'vox': 'na', 'mod': 'na', 'gen': 'na', 'num': 'na', 'stt': 'na', 'cas': 'na', 'per': 'na', 'rat': 'na'}
                 or stem_feats == {'pos': 'conj_sub', 'prc3': '0', 'prc2': 'fa_conj', 'prc1': '0', 'prc0': 'na', 'enc0': 'lA_neg', 'asp': 'na', 'vox': 'na', 'mod': 'na', 'gen': 'na', 'num': 'na', 'stt': 'na', 'cas': 'na', 'per': 'na', 'rat': 'na'} 
-                or stem_feats == {'pos': 'conj_sub', 'prc3': '0', 'prc2': 'wa_conj', 'prc1': '0', 'prc0': 'na', 'enc0': 'lA_neg', 'asp': 'na', 'vox': 'na', 'mod': 'na', 'gen': 'na', 'num': 'na', 'stt': 'na', 'cas': 'na', 'per': 'na', 'rat': 'na'} 
+                or stem_feats == {'pos': 'conj_sub', 'prc3': '0', 'prc2': 'wa_part', 'prc1': '0', 'prc0': 'na', 'enc0': 'lA_neg', 'asp': 'na', 'vox': 'na', 'mod': 'na', 'gen': 'na', 'num': 'na', 'stt': 'na', 'cas': 'na', 'per': 'na', 'rat': 'na'} 
                 ):
                     stem_feats['prc1'] = 'li_prep'
             
