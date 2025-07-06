@@ -147,12 +147,10 @@ def get_main_features_df(word_analysis):
         catib6.append("NOM")
         ud.append("NOUN")
         return pd.DataFrame({'token': tokens, 'catib6': catib6, 'ud': ud, 'lemma': lemmas})
-    try:
-        return pd.DataFrame({'token': tokens, 'catib6': catib6, 'ud': ud, 'lemma': lemmas})
-    except:
-        print('Discrepency in length of token, catib6, and/or ud list')
-        print(f'Lengths: token = {len(tokens)}, catib6 = {len(catib6)}, ud = {len(ud)}')
-        assert False
+    elif len(tokens) < len(catib6):
+        return pd.DataFrame({'token': tokens, 'catib6': catib6[:len(tokens)], 'ud': ud[:len(tokens)], 'lemma': lemmas})
+
+    return pd.DataFrame({'token': tokens, 'catib6': catib6, 'ud': ud, 'lemma': lemmas})
 
 def get_word_features_df(word_analysis, clitic_feats):
     """if a word is composed of multiple tokens, return them all.
