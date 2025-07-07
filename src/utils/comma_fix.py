@@ -167,7 +167,7 @@ def get_comma_id_list(conllx_df: DataFrame) -> List[int]:
 # def fix_comma(comma_id: int, conllx_df: DataFrame) -> Union[DataFrame, Exception]:
 def fix_comma(comma_id: int, conllx_df: DataFrame) -> Union[DataFrame, bool]:
     """The algorithm is as follows:
-    check if the tree is projective, otherwise raise an exception
+    check if the tree is projective, otherwise return tree unchanged
     get the token before it
         is the the token a root?
         is the the token ahead of the comma?
