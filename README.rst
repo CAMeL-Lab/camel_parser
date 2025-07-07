@@ -147,6 +147,12 @@ follow these steps (note that you need an account with the LDC):
 
 5. When running the main script, use -b and pass calima-msa-s31.
 
+Reproducing paper results
+-------------------------
+
+To reproduce the results in our paper *CamelParser2.0: A State-of-the-Art Dependency Parser for Arabic*, please use the code found
+in the *paper_version* branch.
+
 Citation
 --------
 
