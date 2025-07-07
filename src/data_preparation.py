@@ -7,6 +7,7 @@ from camel_tools.disambig.common import DisambiguatedWord
 
 from src.utils.comma_fix import fix_sentence_commas
 from src.utils.conll_fixes import adjust_eof_newlines
+from src.utils.fix_pnx_head import pnx_head_fix
 from .classes import ConllParams, TextParams, PreprocessedTextParams, TokenizedParams, TokenizedTaggedParams, get_conll_tree_header_list
 from .dependency_parser.biaff_parser import parse_conll, parse_text_tuples
 from .initialize_disambiguator.disambiguator_interface import get_disambiguator
@@ -189,9 +190,9 @@ def parse_text(file_type: str, file_type_params: FileTypeParams):
         parsed_text_tuples = add_feats(parsed_text_tuples, text_feats)
     df_list = [pd.DataFrame(sentence_tree_tuples, columns=get_conll_tree_header_list()).astype({'ID': 'int32', 'HEAD': 'int32'}) for sentence_tree_tuples in parsed_text_tuples]
 
-    # import pdb; pdb.set_trace()
-    comma_fixed_trees = [fix_sentence_commas(df) for df in df_list]
+    pnx_head_fixed_trees = [pnx_head_fix(df) for df in df_list]
 
+    comma_fixed_trees = [fix_sentence_commas(df) for df in pnx_head_fixed_trees]
     comma_fixed_trees_tuple = [list(df.itertuples(index=False, name=None)) for df in comma_fixed_trees]
 
     return comma_fixed_trees_tuple
