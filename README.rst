@@ -21,7 +21,7 @@ Installation
 ------------
 1. Clone this repo
 
-2. Set up a virtual environment using Python 3.9.16 (you can follow the tutorial `here <https://www.youtube.com/watch?si=g2zx-D0zdkL50knb&v=31WU0Dhw4sk&feature=youtu.be>`_).
+2. Set up a virtual environment using Python 3.11.13 (you can follow the tutorial `here <https://www.youtube.com/watch?si=g2zx-D0zdkL50knb&v=31WU0Dhw4sk&feature=youtu.be>`_).
 
 Currently, CamelParser does not work with later versions of python due to issues with some dependencies.
 
@@ -126,7 +126,7 @@ For our paper, we used the calima-msa-s31 database. To use this database,
 follow these steps (note that you need an account with the LDC):
 
 
-1. Install camel_tools v1.5.2 or later (you can check this using camel_data -v)
+1. Install camel_tools v1.5.6 or later (you can check this using camel_data -v)
 
 2. Download the camel data for the BERT unfactored (MSA) model, as well as the morphology database:
 
