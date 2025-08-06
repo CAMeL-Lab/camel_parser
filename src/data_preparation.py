@@ -113,7 +113,8 @@ def handle_text_types(file_type_params, text_type: str):
     else:
         assert False, f'Invalid type to process: {text_type}'
 
-
+    token_lines = [token_line for token_line in token_lines if token_line]
+    
     # if str passed, we should create the disambiguator using disambiguator_param and morphology_db_type
     if type(disambiguator_param) == str:
         disambiguator = get_disambiguator(disambiguator_param, morphology_db_type)
@@ -125,7 +126,7 @@ def handle_text_types(file_type_params, text_type: str):
     # get a single analysis for each word (top or tok_match, match not implemented yet)
     # sentence_analysis_list: List[List[dict]] = to_sentence_analysis_list(disambiguated_sentences, selection, selection_criteria)
     sentence_analysis_list: List[List[dict]] = to_sentence_analysis_list(disambiguated_sentences, token_lines)
-    
+
     # extract the relevant items from each analysis into conll fields
     return to_conll_fields_list(sentence_analysis_list, clitic_feats_df, tagset)
     
