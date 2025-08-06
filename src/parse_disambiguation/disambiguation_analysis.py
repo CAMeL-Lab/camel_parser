@@ -51,16 +51,17 @@ def get_sentence_analysis(disambiguated_sentence: List[DisambiguatedWord], token
     # sourcery skip: switch
     # get an analysis based on the selection criteria
     # top means take first
+    # tok_match takes the first analysis that matches diac, otherwise takes first
     # match means take the first analysis that matches the selection criteria.
     # selection criteria: {'criteria1': 'value1', 'criteria2': 'value2'...}
     # return None if criteria not fulfilled.
     # TODO: check if selection criteria contains valid keys
     if selection == 'top':
         return [get_first_analysis(disambig_word) for disambig_word in disambiguated_sentence]
-    elif selection == 'match':
-        return [get_analysis_by_criteria(disambig_word, selection_criteria) for disambig_word in disambiguated_sentence]
     elif selection == 'tok_match':
         return [get_tok_match_analysis(disambig_word, token) for disambig_word, token in zip(disambiguated_sentence, token_line)]
+    elif selection == 'match':
+        return [get_analysis_by_criteria(disambig_word, selection_criteria) for disambig_word in disambiguated_sentence]
     else:
         raise ValueError(f"the selection {selection} is not valid!")
 
