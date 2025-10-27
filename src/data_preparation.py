@@ -187,14 +187,15 @@ def parse_text(file_type: str, file_type_params: FileTypeParams):
         text_feats: List[List[str]] = get_feats_from_text_tuples(text_tuples)
         # place features in FEATS column
         parsed_text_tuples = add_feats(parsed_text_tuples, text_feats)
-    df_list = [pd.DataFrame(sentence_tree_tuples, columns=get_conll_tree_header_list()).astype({'ID': 'int32', 'HEAD': 'int32'}) for sentence_tree_tuples in parsed_text_tuples]
+    # df_list = [pd.DataFrame(sentence_tree_tuples, columns=get_conll_tree_header_list()).astype({'ID': 'int32', 'HEAD': 'int32'}) for sentence_tree_tuples in parsed_text_tuples]
 
-    # import pdb; pdb.set_trace()
-    comma_fixed_trees = [fix_sentence_commas(df) for df in df_list]
+    # # import pdb; pdb.set_trace()
+    # comma_fixed_trees = [fix_sentence_commas(df) for df in df_list]
 
-    comma_fixed_trees_tuple = [list(df.itertuples(index=False, name=None)) for df in comma_fixed_trees]
+    # comma_fixed_trees_tuple = [list(df.itertuples(index=False, name=None)) for df in comma_fixed_trees]
 
-    return comma_fixed_trees_tuple
+    # return comma_fixed_trees_tuple
+    return parsed_text_tuples
 
 def get_tagset(parse_model):
     if parse_model == 'catib':
