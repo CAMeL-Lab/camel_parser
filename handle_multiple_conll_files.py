@@ -5,6 +5,7 @@ Usage:
     text_to_conll_cli (-i <input> | --input=<input>)
         (-o <output> | --output=<output>)
         [-m <model> | --model=<model>]
+        [--single-root]
     text_to_conll_cli (-h | --help)
 
 Options:
@@ -14,6 +15,8 @@ Options:
         The directory to save the parsed CoNLL-X files
     -m <model> --model=<model>
         The name BERT model used to parse (to be placed in the model directory) [default: catib]
+    --single-root
+        Produce parses with exactly one root per sentence.
     -h --help
         Show this screen.
 """
@@ -81,6 +84,9 @@ def main():
     input_path = arguments['--input']
     output_path = arguments['--output']
     parse_model = arguments['--model']
+    multiroot = True
+    if arguments['--single-root']:
+        multiroot = False
 
     #
     ### Set up parsing model 
@@ -95,7 +101,11 @@ def main():
         for text_file in files:
             print(f'processing {text_file}')
             file_type_params = ConllParams(str(Path(input_path) / text_file), model_path/model_name)
-            parsed_text_tuples = parse_text("conll", file_type_params)
+            parsed_text_tuples = parse_text(
+                "conll",
+                file_type_params,
+                multiroot=multiroot,
+            )
 
             lines = []
             with open(f'{root}/{text_file}', 'r') as f:
