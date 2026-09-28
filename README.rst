@@ -99,6 +99,13 @@ tokenized_tagged is used when the user has the tokens and POS tags. They should 
     
     python text_to_conll_cli.py -f tokenized_tagged -s "(جامعة, NOM) (نيويورك, PROP) (أبو, PROP) (ظبي, PROP) (تنشر, VRB) (أول, NOM) (أطلس, NOM) (ل+, PRT) (كوكب, NOM) (المريخ, PROP) (ب+, PRT) (اللغة, NOM) (العربية, NOM) (., PNX)"
 
+Multi-root decoding
+-------------------
+
+CamelParser uses multi-root decoding by default, permitting multiple
+tokens in a sentence to attach to the artificial root. To produce one root per
+tree, pass ``--single-root``. 
+
 
 Using a custom model
 ------------------
@@ -168,4 +175,16 @@ If you find the CamelParser useful in your research, please cite
     Nizar Habash} ,
         booktitle = {Proceedings of The First Arabic Natural Language Processing Conference (ArabicNLP 2023)},
         year = "2023"
+    }
+
+Please also cite the paper introducing the default multi-root decoding
+
+.. code-block:: bibtex
+
+    @inproceedings{adel-etal-2026-morphosyntactic,
+      author    = {Adel, Mohamed and Alhafni, Bashar and Habash, Nizar},
+      title     = {Arabic Morphosyntactic Tagging and Dependency Parsing with Large Language Models},
+      booktitle = {Proceedings of the 2026 Conference on Empirical Methods in Natural Language Processing ({EMNLP} 2026)},
+      address   = {Budapest, Hungary},
+      year      = {2026}
     }

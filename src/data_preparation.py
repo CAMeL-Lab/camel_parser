@@ -90,10 +90,14 @@ def get_tree_tokens(tok_pos_tuples):
         sentences.append(sentence)
     return sentences
 
-def handle_conll(file_type_params):
+def handle_conll(file_type_params, multiroot: bool = True):
     file_path, parse_model_path = file_type_params
     # pass the path to the text file and the model path and name, and get the tuples
-    return parse_conll(file_path, parse_model=parse_model_path)
+    return parse_conll(
+        file_path,
+        parse_model=parse_model_path,
+        multiroot=multiroot,
+    )
 
 @log
 def disambiguate_sentences(disambiguator, token_lines):
@@ -164,11 +168,18 @@ def get_file_type_params(lines, file_type, file_path, parse_model_path,
     elif file_type == 'tokenized_tagged':
         return TokenizedTaggedParams(lines, parse_model_path)
 
-def parse_text(file_type: str, file_type_params: FileTypeParams):
+def parse_text(
+    file_type: str,
+    file_type_params: FileTypeParams,
+    multiroot: bool = True,
+):
     if file_type == 'conll':
         # handle_conll(file_path, parse_model_path)
         adjust_eof_newlines(file_type_params.file_path)
-        parsed_text_tuples = handle_conll(file_type_params)
+        parsed_text_tuples = handle_conll(
+            file_type_params,
+            multiroot=multiroot,
+        )
     else:
         text_tuples: List[List[tuple]] = []
         if file_type == 'text':
@@ -181,7 +192,11 @@ def parse_text(file_type: str, file_type_params: FileTypeParams):
             text_tuples = handle_tokenized_tagged(file_type_params)
 
         # the text tuples created from the above processes is passed to the dependency parser
-        parsed_text_tuples = parse_text_tuples(text_tuples, parse_model=str(file_type_params.parse_model_path))
+        parsed_text_tuples = parse_text_tuples(
+            text_tuples,
+            parse_model=str(file_type_params.parse_model_path),
+            multiroot=multiroot,
+        )
         # for text/preprocessed_text, we want to extract the features to place in parsed_text_tuples
         # TODO: check if this step can be skipped by placing features in a step above
         text_feats: List[List[str]] = get_feats_from_text_tuples(text_tuples)

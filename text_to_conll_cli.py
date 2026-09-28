@@ -7,6 +7,7 @@ Usage:
         [-b <morphology_db_type> | --morphology_db_type=<morphology_db_type>]
         [-d <disambiguator> | --disambiguator=<disambiguator>]
         [-m <model> | --model=<model>]
+        [--single-root]
     text_to_conll_cli (-h | --help)
 
 Options:
@@ -27,6 +28,8 @@ Options:
         The disambiguation technique used to tokenize the text lines, either 'mle' or 'bert' [default: bert]
     -m <model> --model=<model>
         The name BERT model used to parse (to be placed in the model directory) [default: catib]
+    --single-root
+        Produce parses with exactly one root per sentence.
     -h --help
         Show this screen.
 """
@@ -74,6 +77,9 @@ def main():
     morphology_db_type = arguments['--morphology_db_type']
     disambiguator_type = arguments['--disambiguator']
     parse_model = arguments['--model']
+    multiroot = True
+    if arguments['--single-root']:
+        multiroot = False
 
 
     #
@@ -101,7 +107,11 @@ def main():
 
     file_type_params = get_file_type_params(lines, file_type, file_path, model_path/model_name,
         arclean, disambiguator_type, clitic_feats_df, tagset, morphology_db_type)
-    parsed_text_tuples = parse_text(file_type, file_type_params)
+    parsed_text_tuples = parse_text(
+        file_type,
+        file_type_params,
+        multiroot=multiroot,
+    )
 
     string_lines = text_tuples_to_string(parsed_text_tuples, file_type, sentences=lines)
     print_to_conll(string_lines)
